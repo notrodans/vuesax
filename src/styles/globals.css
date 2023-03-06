@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+*:focus {
+	@apply outline-vuesax-white outline-offset-2 outline-1
+}
+
+html,
+body {
+	@apply bg-vuesax-bluewood text-vuesax-white min-h-full min-w-[320px] text-base
+}
+
+button {
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: inherit;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+ul li {
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 700;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.container {
+	@apply ml-auto mr-auto max-w-[1570px] px-[15px]
+}

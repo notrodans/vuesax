@@ -1,0 +1,19 @@
+.header {
+	@apply my-[30px] px-[15px]
+}
+
+.container {
+	@apply bg-vuesax-darkBlue px-5 py-[18px] rounded-[18px]
+}
+
+.body {
+	@apply flex justify-between items-center gap-x-5 
+}
+
+.actions {
+	@apply flex gap-x-[20px]
+}
+
+.right {
+	@apply flex gap-x-[30px]
+}

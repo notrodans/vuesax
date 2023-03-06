@@ -1,0 +1,7 @@
+.logo {
+	@apply flex gap-[10px]
+}
+
+.title {
+	@apply text-vuesax-primary font-semibold text-2xl
+}

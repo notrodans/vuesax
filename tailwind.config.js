@@ -1,5 +1,9 @@
 const colors = require("tailwindcss/colors");
 
+const pxToRem = px => {
+	return `${px / 16}rem`;
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -23,15 +27,21 @@ module.exports = {
 					cyan: "#50E3C2",
 					orange: "#FFA84C",
 					violet: "#7928CA",
+					purple: "#6F64F8",
 					primary: "#7E72F2",
+					gray: "#B8C2CC",
+					wood: "#2C2C20",
 					bluewood: "#2B3253"
 				}
 			},
 			backgroundImage: ({ theme }) => ({
-				"vc-border-gradient": `radial-gradient(at left top, ${theme(
-					"colors.gray.500"
-				)}, 50px, ${theme("colors.gray.800")} 50%)`
+				"vc-border-gradient": `radial-gradient(at left top, ${theme("colors.gray.500")}, ${pxToRem(
+					50
+				)}, ${theme("colors.gray.800")} 50%)`
 			}),
+			gridTemplateColumns: {
+				categories: `${pxToRem(370)} 1fr`
+			},
 			keyframes: ({ theme }) => ({
 				rerender: {
 					"0%": {

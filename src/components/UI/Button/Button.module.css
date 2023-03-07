@@ -1,0 +1,27 @@
+.button {
+	@apply inline-flex items-center justify-center gap-x-[10px] uppercase px-4 py-3 transition-colors
+}
+
+.button.light {
+	@apply font-light
+}
+
+.button.regular {
+	@apply font-normal
+}
+
+.button.semiBold {
+	@apply font-semibold
+}
+
+.button.primary {
+	@apply bg-vuesax-purple text-vuesax-white hover:bg-vuesax-primary
+}
+
+.button.gray {
+	@apply bg-vuesax-gray text-vuesax-wood hover:bg-pink-400
+}
+
+.button.small {
+	@apply px-2 py-1
+}

@@ -1,13 +1,13 @@
 .breadcrumbs {
-	@apply flex gap-x-[10px] items-center content-baseline
+	@apply flex gap-x-[10px] items-center content-baseline mb-[50px]
 }
 
 .category {
-	@apply capitalize
+	@apply capitalize text-2xl
 }
 
 .vDivider {
-
+	@apply w-[1px] bg-[#979797] self-stretch
 }
 
 .goBack {
@@ -27,5 +27,5 @@
 }
 
 .active {
-	@apply text-vuesax-violet
+	@apply text-vuesax-primary
 }

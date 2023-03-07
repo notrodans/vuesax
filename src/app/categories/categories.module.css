@@ -1,0 +1,11 @@
+.container {
+	@apply grid grid-cols-categories gap-[30px]
+}
+
+.title:not(:last-child) {
+	@apply mb-5
+}
+
+.body {
+	@apply grid grid-cols-3 gap-[30px]
+}

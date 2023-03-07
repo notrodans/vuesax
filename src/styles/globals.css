@@ -62,3 +62,7 @@ h6 {
 .container {
 	@apply ml-auto mr-auto max-w-[1570px] px-[15px]
 }
+
+.range .spectrum-Slider-handle_e4b6ba {
+	@apply bg-vuesax-violet
+}

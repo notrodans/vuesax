@@ -4,34 +4,38 @@ import clsx from "clsx";
 import Image from "next/image";
 import { FC } from "react";
 import styles from "./Card.module.css";
+import { CardProps } from "./Card.props";
 
-const Card: FC = () => {
+const Card: FC<CardProps> = ({ image, title, text, cost, rating, className, ...props }) => {
 	return (
-		<div className={styles.card}>
+		<div className={clsx(styles.card, className)} {...props}>
 			<div className={styles.image}>
 				<Image
-					src={"/apple-watch.png"}
+					src={image}
 					width={220}
-					height={272}
+					height={273}
 					style={{
-						width: "100%",
+						width: "auto",
+						height: "17.0625rem",
+						aspectRatio: "220/273",
 						objectFit: "contain"
 					}}
+					loading={"lazy"}
 					alt={"card"}
 				/>
 			</div>
 			<div className={styles.body}>
 				<div className={styles.header}>
 					<Button size='small' iconRight={<Star />} className={styles.ratingButton}>
-						<span className={styles.rating}>3.4</span>
+						<span className={styles.rating}>{rating}</span>
 					</Button>
-					<span className={styles.cost}>$399</span>
+					<span className={styles.cost}>{cost}</span>
 				</div>
 				<div className={styles.description}>
 					<Title tag='h3' className={styles.title}>
-						Apple Watch Series 4 GPS
+						{title}
 					</Title>
-					<p className={styles.text}>Redesigned from scratch and completely revised.</p>
+					<p className={styles.text}>{text}</p>
 				</div>
 				<div className={styles.buttons}>
 					<Button
@@ -39,10 +43,16 @@ const Card: FC = () => {
 						weight='600'
 						className={clsx(styles.button, styles.wishButton)}
 						icon={<Heart />}
+						textTransform='upper'
 					>
 						wishlist
 					</Button>
-					<Button weight='600' className={clsx(styles.button, styles.addButton)} icon={<ShopBag />}>
+					<Button
+						weight='600'
+						className={clsx(styles.button, styles.addButton)}
+						icon={<ShopBag />}
+						textTransform='upper'
+					>
 						add to cart
 					</Button>
 				</div>

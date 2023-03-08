@@ -3,15 +3,11 @@
 }
 
 .image {
-	@apply text-center mb-[35px]
-}
-
-.image img {
-	@apply max-w-[220px] m-auto
+	@apply self-center mb-[35px]
 }
 
 .body {
-	@apply flex h-full flex-col
+	@apply flex flex-auto flex-col
 }
 
 .header {
@@ -46,11 +42,11 @@
 }
 
 .text {
-	@apply line-clamp-1;
+	@apply line-clamp-2;
 }
 
 .buttons {
-	@apply flex m-[-20px] mt-0
+	@apply flex flex-col m-[-20px] mt-0 sm:flex-row
 }
 
 .button {
@@ -62,9 +58,9 @@
 }
 
 .wishButton {
-	@apply rounded-bl-lg
+	@apply sm:rounded-bl-lg
 }
 
 .addButton {
-	@apply rounded-br-lg
+	@apply rounded-b-lg sm:rounded-br-lg sm:rounded-bl-none
 }

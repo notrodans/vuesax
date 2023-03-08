@@ -1,5 +1,5 @@
 .logo {
-	@apply flex gap-[10px]
+	@apply flex gap-[10px] items-center
 }
 
 .title {

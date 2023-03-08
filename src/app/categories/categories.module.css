@@ -1,5 +1,5 @@
 .container {
-	@apply grid grid-cols-categories gap-[30px]
+	@apply grid lg:grid-cols-categories gap-[30px]
 }
 
 .title:not(:last-child) {
@@ -7,5 +7,5 @@
 }
 
 .body {
-	@apply grid grid-cols-3 gap-[30px]
+	@apply grid gap-[30px] 2xl:grid-cols-3 sm:grid-cols-2
 }

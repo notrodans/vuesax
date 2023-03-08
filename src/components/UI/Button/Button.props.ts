@@ -8,4 +8,6 @@ export interface ButtonProps
 	weight?: "300" | "400" | "600";
 	apperance?: "primary" | "gray";
 	size?: "normal" | "small";
+	rounded?: boolean;
+	textTransform?: false | "upper" | "capitalize";
 }

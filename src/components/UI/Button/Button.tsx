@@ -9,6 +9,8 @@ const Button: FC<ButtonProps> = ({
 	weight = "400",
 	size = "normal",
 	apperance = "primary",
+	rounded = false,
+	textTransform = false,
 	children,
 	className,
 	...props
@@ -22,7 +24,10 @@ const Button: FC<ButtonProps> = ({
 				[styles.primary]: apperance === "primary",
 				[styles.gray]: apperance === "gray",
 				[styles.normal]: size === "normal",
-				[styles.small]: size === "small"
+				[styles.small]: size === "small",
+				[styles.rounded]: rounded,
+				[styles.upper]: textTransform === "upper",
+				[styles.capitalize]: textTransform === "capitalize"
 			})}
 			{...props}
 		>

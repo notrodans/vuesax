@@ -1,5 +1,9 @@
 .breadcrumbs {
-	@apply flex gap-x-[10px] items-center content-baseline mb-[50px]
+	@apply mb-[50px]
+}
+
+.body {
+	@apply flex gap-x-[10px] items-center content-baseline
 }
 
 .category {
@@ -23,7 +27,7 @@
 }
 
 .link {
-	@apply capitalize
+	@apply capitalize font-semibold
 }
 
 .active {

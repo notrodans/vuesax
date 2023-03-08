@@ -10,16 +10,40 @@ module.exports = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
+	important: true,
 	darkMode: "class",
 	theme: {
+		screens: {
+			sm: "47.99875em",
+			md: "61.99875em",
+			lg: "80em",
+			xl: "90em",
+			"2xl": "98.1250em"
+		},
+		container: {
+			padding: "0.9375rem",
+			center: true,
+			screens: {
+				sm: "47.99875em",
+				md: "61.99875em",
+				lg: "80em",
+				xl: "90em",
+				"2xl": "98.1250em"
+			}
+		},
 		extend: {
 			fontFamily: {
 				sans: ["var(--primary-font)"]
 			},
+			container: {
+				padding: "0.9375rem",
+				center: true,
+				screens: {
+					none: "auto",
+					"2xl": "98.1250em"
+				}
+			},
 			colors: {
-				gray: colors.zinc,
-				"gray-1000": "rgb(17,17,19)",
-				"gray-1100": "rgb(10,10,11)",
 				vuesax: {
 					white: "#FFFFFF",
 					pink: "#FF0080",
@@ -40,7 +64,7 @@ module.exports = {
 				)}, ${theme("colors.gray.800")} 50%)`
 			}),
 			gridTemplateColumns: {
-				categories: `${pxToRem(370)} 1fr`
+				categories: `minmax(${pxToRem(200)}, ${pxToRem(370)}) 1fr`
 			},
 			keyframes: ({ theme }) => ({
 				rerender: {

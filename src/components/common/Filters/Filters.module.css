@@ -9,3 +9,11 @@
 .body {
 	@apply rounded-lg bg-vuesax-darkBlue p-[25px] h-full
 }
+
+.body:not(:last-child) {
+	@apply mb-[30px]
+}
+
+.checkbox:not(:last-child) {
+	@apply mb-[15px]
+}

@@ -1,0 +1,19 @@
+.checkbox {
+	@apply flex gap-[10px] items-center cursor-pointer
+}
+
+.box {
+	@apply w-4 h-4 rounded-[3px] border-2 border-solid border-vuesax-white transition-colors outline-transparent outline outline-[2px]
+}
+
+.rounded {
+	@apply rounded-[50%]
+}
+
+.active {
+	@apply bg-vuesax-purple border-vuesax-purple
+}
+
+.focus {
+	@apply border-none outline-vuesax-white 
+}

@@ -60,7 +60,7 @@ h6 {
 }
 
 .container {
-	@apply ml-auto mr-auto max-w-[1570px] px-[15px]
+	@apply box-content w-auto
 }
 
 .range .spectrum-Slider-handle_e4b6ba {

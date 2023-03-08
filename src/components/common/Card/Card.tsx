@@ -6,24 +6,25 @@ import { FC } from "react";
 import styles from "./Card.module.css";
 import { CardProps } from "./Card.props";
 
-const Card: FC<CardProps> = ({ image, title, text, cost, rating, className, ...props }) => {
+const Card: FC<CardProps> = props => {
+	const { image, title, text, cost, rating, className, ...cardProps } = props;
+
 	return (
-		<div className={clsx(styles.card, className)} {...props}>
-			<div className={styles.image}>
-				<Image
-					src={image}
-					width={220}
-					height={273}
-					style={{
-						width: "auto",
-						height: "17.0625rem",
-						aspectRatio: "220/273",
-						objectFit: "contain"
-					}}
-					loading={"lazy"}
-					alt={"card"}
-				/>
-			</div>
+		<div className={clsx(styles.card, className)} {...cardProps}>
+			<div className={styles.image}></div>
+			<Image
+				className={clsx(styles.image)}
+				src={image}
+				width={220}
+				height={273}
+				sizes='100vw'
+				style={{
+					height: 273,
+					objectFit: "contain"
+				}}
+				loading={"lazy"}
+				alt={"card"}
+			/>
 			<div className={styles.body}>
 				<div className={styles.header}>
 					<Button size='small' iconRight={<Star />} className={styles.ratingButton}>
@@ -32,7 +33,7 @@ const Card: FC<CardProps> = ({ image, title, text, cost, rating, className, ...p
 					<span className={styles.cost}>{cost}</span>
 				</div>
 				<div className={styles.description}>
-					<Title tag='h3' className={styles.title}>
+					<Title tag='h3' margin={false} className={styles.title}>
 						{title}
 					</Title>
 					<p className={styles.text}>{text}</p>

@@ -1,20 +1,26 @@
+"use client";
+
 import clsx from "clsx";
 import { FC } from "react";
+import { mergeProps, useFocusRing, usePress } from "react-aria";
 import styles from "./Button.module.css";
 import { ButtonProps } from "./Button.props";
 
-const Button: FC<ButtonProps> = ({
-	icon,
-	iconRight,
-	weight = "400",
-	size = "normal",
-	apperance = "primary",
-	rounded = false,
-	textTransform = false,
-	children,
-	className,
-	...props
-}) => {
+const Button: FC<ButtonProps> = props => {
+	const {
+		icon,
+		iconRight,
+		weight = "400",
+		size = "normal",
+		apperance = "primary",
+		rounded = false,
+		textTransform = false,
+		children,
+		className,
+		...buttonProps
+	} = props;
+	const { pressProps, isPressed } = usePress(buttonProps);
+	const { focusProps, isFocusVisible } = useFocusRing(buttonProps);
 	return (
 		<button
 			className={clsx(styles.button, className, {
@@ -27,9 +33,11 @@ const Button: FC<ButtonProps> = ({
 				[styles.small]: size === "small",
 				[styles.rounded]: rounded,
 				[styles.upper]: textTransform === "upper",
-				[styles.capitalize]: textTransform === "capitalize"
+				[styles.capitalize]: textTransform === "capitalize",
+				[styles.pressed]: isPressed,
+				[styles.focus]: isFocusVisible
 			})}
-			{...props}
+			{...mergeProps(pressProps, focusProps)}
 		>
 			{icon && icon}
 			{children}

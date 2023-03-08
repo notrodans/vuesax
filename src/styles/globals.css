@@ -14,10 +14,6 @@
 	box-sizing: border-box;
 }
 
-*:focus {
-	@apply outline-vuesax-white outline-offset-2 outline-1
-}
-
 html,
 body {
 	@apply bg-vuesax-bluewood text-vuesax-white min-h-full min-w-[320px] text-base
@@ -57,6 +53,11 @@ h6 {
 	font-weight: 700;
 	font-size: inherit;
 	font-family: inherit;
+}
+
+img,video {
+	max-width: none;
+	height: inherit;
 }
 
 .container {

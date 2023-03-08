@@ -1,7 +1,13 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren, ReactNode } from "react";
+import { AriaFocusRingProps, PressHookProps } from "react-aria";
 
 export interface ButtonProps
-	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+	extends Omit<
+			DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+			"ref"
+		>,
+		PressHookProps,
+		AriaFocusRingProps,
 		PropsWithChildren {
 	icon?: ReactNode;
 	iconRight?: ReactNode;

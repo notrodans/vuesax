@@ -10,7 +10,7 @@ module.exports = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
-	important: true,
+	blocklist: ["height"],
 	darkMode: "class",
 	theme: {
 		screens: {
@@ -32,6 +32,7 @@ module.exports = {
 			}
 		},
 		extend: {
+			height: "none",
 			fontFamily: {
 				sans: ["var(--primary-font)"]
 			},

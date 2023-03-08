@@ -1,5 +1,5 @@
 .breadcrumbs {
-	@apply mb-[50px]
+	@apply mb-6 lg:mb-[50px]
 }
 
 .body {

@@ -1,5 +1,5 @@
 .button {
-	@apply inline-flex items-center justify-center gap-x-[10px] px-4 py-3 transition-colors
+	@apply inline-flex items-center justify-center gap-x-[10px] px-4 py-3 transition-colors outline-none
 }
 
 .button.light {
@@ -36,4 +36,16 @@
 
 .button.capit {
 	@apply capitalize
+}
+
+.button.primary.pressed {
+	@apply bg-vuesax-purple
+}
+
+.button.gray.pressed {
+	@apply bg-pink-600
+}
+
+.button.focus {
+	@apply outline-current outline-offset-2
 }

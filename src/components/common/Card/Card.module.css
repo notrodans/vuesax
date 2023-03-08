@@ -3,7 +3,11 @@
 }
 
 .image {
-	@apply self-center mb-[35px]
+	@apply self-center
+}
+
+.image:not(:last-child) {
+	@apply mb-[35px]
 }
 
 .body {

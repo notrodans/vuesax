@@ -1,27 +1,27 @@
 .tag {
-	@apply text-vuesax-white
+	@apply text-vuesax-white m-0
 }
 
-.h1:not(:last-child) {
+.h1.margin:not(:last-child) {
 	@apply mb-[5px]
 }
 
-.h2:not(:last-child) {
+.h2.margin:not(:last-child) {
 	@apply mb-[10px]
 }
 
-.h3:not(:last-child) {
+.h3.margin:not(:last-child) {
 	@apply mb-[15px]
 }
 
-.small {
+.tag.small {
 	@apply text-base
 }
 
-.medium {
+.tag.medium {
 	@apply text-lg
 }
 
-.large {
+.tag.large {
 	@apply text-xl
 }

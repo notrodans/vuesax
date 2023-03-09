@@ -5,3 +5,4 @@ export { default as Slider } from "./Slider/Slider";
 export { default as Title } from "./Title/Title";
 export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as CheckboxsContainer } from "./CheckboxsContainer/CheckboxsContainer";
+export { default as Divider } from "./Divider/Divider";

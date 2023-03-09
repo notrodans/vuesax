@@ -15,5 +15,6 @@ export interface ButtonProps
 	apperance?: "primary" | "gray";
 	size?: "normal" | "small";
 	rounded?: boolean;
+	forceRounded?: boolean;
 	textTransform?: false | "upper" | "capitalize";
 }

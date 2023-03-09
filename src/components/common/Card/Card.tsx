@@ -22,12 +22,12 @@ const Card: FC<CardProps> = props => {
 					height: 273,
 					objectFit: "contain"
 				}}
-				loading={"lazy"}
+				priority
 				alt={"card"}
 			/>
 			<div className={styles.body}>
 				<div className={styles.header}>
-					<Button size='small' iconRight={<Star />} className={styles.ratingButton}>
+					<Button size='small' weight='600' iconRight={<Star />} className={styles.ratingButton}>
 						<span className={styles.rating}>{rating}</span>
 					</Button>
 					<span className={styles.cost}>{cost}</span>

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { MutableRefObject } from "react";
-import { FC, useRef } from "react";
+import { useSliderState } from "react-stately";
+
 import {
 	mergeProps,
 	useFocusRing,
@@ -10,44 +10,54 @@ import {
 	useSliderThumb,
 	VisuallyHidden
 } from "react-aria";
-import { SliderState, useSliderState } from "react-stately";
-import { SliderProps } from "./Slider.props";
+import styles from "./Slider.module.css";
+import { FC, memo, useRef } from "react";
+import { SliderProps, ThumbProps } from "./Slider.props";
+import clsx from "clsx";
 
 const Slider: FC<SliderProps> = props => {
+	const { multi = false, ...sliderProps } = props;
 	const trackRef = useRef(null);
-	const numberFormatter = useNumberFormatter({});
-	const state = useSliderState({ ...props, numberFormatter });
-	const { groupProps, trackProps, labelProps, outputProps } = useSlider(props, state, trackRef);
+	const numberFormatter = useNumberFormatter(sliderProps.formatOptions);
+	const state = useSliderState({ ...sliderProps, numberFormatter });
+	const { groupProps, trackProps, labelProps, outputProps } = useSlider(
+		sliderProps,
+		state,
+		trackRef
+	);
 
 	return (
-		<div
-			aria-label={props?.label || labelProps["aria-label"]}
-			{...groupProps}
-			className={`slider ${state.orientation}`}
-		>
-			{/* Create a container for the label and output element. */}
+		<div {...groupProps} className={styles.slider}>
 			{props.label && (
-				<div className='label-container'>
-					<label {...labelProps}>{props.label}</label>
-					<output {...outputProps}>{state.getThumbValueLabel(0)}</output>
+				<div className={styles.label}>
+					<label className={styles.labelTitle} {...labelProps}>
+						{props.label}
+					</label>
+					<output {...outputProps}>
+						{!multi
+							? state.getThumbValueLabel(0)
+							: `${state.getThumbValueLabel(0)} - ${state.getThumbValueLabel(1)}`}
+					</output>
 				</div>
 			)}
-			{/* The track element holds the visible track line and the thumb. */}
-			<div {...trackProps} ref={trackRef} className={`track ${state.isDisabled ? "disabled" : ""}`}>
+			<div
+				{...trackProps}
+				ref={trackRef}
+				className={clsx(styles.track, {
+					[styles.disabled]: state.isDisabled
+				})}
+			>
 				<Thumb index={0} state={state} trackRef={trackRef} />
+				{multi && <Thumb index={1} state={state} trackRef={trackRef} />}
 			</div>
 		</div>
 	);
 };
 
-const Thumb: FC<{
-	state: SliderState;
-	trackRef: MutableRefObject<null>;
-	index: number;
-}> = props => {
+const Thumb: FC<ThumbProps> = props => {
 	const { state, trackRef, index } = props;
-	const inputRef = React.useRef(null);
-	const { thumbProps, inputProps, isDragging } = useSliderThumb(
+	const inputRef = useRef(null);
+	const { thumbProps, inputProps } = useSliderThumb(
 		{
 			index,
 			trackRef,
@@ -56,12 +66,9 @@ const Thumb: FC<{
 		state
 	);
 
-	const { focusProps, isFocusVisible } = useFocusRing();
+	const { focusProps } = useFocusRing();
 	return (
-		<div
-			{...thumbProps}
-			className={`thumb ${isFocusVisible ? "focus" : ""} ${isDragging ? "dragging" : ""}`}
-		>
+		<div {...thumbProps} className={styles.thumb}>
 			<VisuallyHidden>
 				<input ref={inputRef} {...mergeProps(inputProps, focusProps)} />
 			</VisuallyHidden>
@@ -69,4 +76,4 @@ const Thumb: FC<{
 	);
 };
 
-export default Slider;
+export default memo(Slider);

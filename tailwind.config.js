@@ -10,7 +10,6 @@ module.exports = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
-	blocklist: ["height"],
 	darkMode: "class",
 	theme: {
 		screens: {
@@ -24,8 +23,8 @@ module.exports = {
 			padding: "0.9375rem",
 			center: true,
 			screens: {
-				sm: "47.99875em",
-				md: "61.99875em",
+				sm: "61.99875em",
+				md: "64em",
 				lg: "80em",
 				xl: "90em",
 				"2xl": "98.1250em"

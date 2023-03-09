@@ -1,13 +1,17 @@
 .filters {
-	@apply flex flex-col
+	@apply flex-col flex
 }
 
-.title:not(:last-child) {
-	@apply mb-5
+.header:not(:last-child) {
+	@apply mb-5 flex justify-between gap-x-3
+}
+
+.openButton {
+	@apply w-10 h-10
 }
 
 .body {
-	@apply rounded-lg bg-vuesax-darkBlue p-[25px] h-full
+	@apply max-md:hidden rounded-lg bg-vuesax-darkBlue p-[25px] h-full
 }
 
 .body:not(:last-child) {
@@ -19,3 +23,7 @@
 }
 
 .prices {}
+
+.active {
+	@apply block
+}

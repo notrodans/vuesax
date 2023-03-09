@@ -2,14 +2,20 @@
 
 import { rangeKeys, rangeType } from "#/components/common/Filters/Filters.consts";
 import clsx from "clsx";
-import React, { FC, memo, useMemo, useState } from "react";
+import { FC, memo, useMemo } from "react";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./CheckboxsContainer.module.css";
 import { CheckboxsContainerProps } from "./CheckboxsContainer.props";
 
 const CheckboxsContainer: FC<CheckboxsContainerProps> = props => {
-	const { children, className, data, onChangeData, ...checkboxsContainerProps } = props;
-	const [rangeSelected] = useState<rangeType | null>(data ? { ...data } : null);
+	const {
+		children,
+		className,
+		data: rangeSelected,
+		onChangeData,
+		checkBoxProps,
+		...checkboxsContainerProps
+	} = props;
 	const rangeSelectedEntries = useMemo(
 		() =>
 			rangeSelected &&
@@ -47,7 +53,7 @@ const CheckboxsContainer: FC<CheckboxsContainerProps> = props => {
 		}
 	};
 
-	if (data) {
+	if (rangeSelected) {
 		return (
 			<div className={clsx(styles.checkboxsContainer, className)} {...checkboxsContainerProps}>
 				{rangeSelectedEntries &&
@@ -57,6 +63,7 @@ const CheckboxsContainer: FC<CheckboxsContainerProps> = props => {
 							key={key}
 							isSelected={value.isSelected}
 							onChange={() => onChangeCheckbox(key)}
+							{...checkBoxProps}
 						>
 							{value.children}
 						</Checkbox>

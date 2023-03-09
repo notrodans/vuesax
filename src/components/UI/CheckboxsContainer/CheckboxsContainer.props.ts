@@ -7,4 +7,5 @@ export interface CheckboxsContainerProps
 	children?: (CheckboxProps & ReactNode)[] | (CheckboxProps & ReactNode);
 	data?: rangeType | null;
 	onChangeData?: Dispatch<SetStateAction<rangeType | null>>;
+	checkBoxProps?: CheckboxProps;
 }

@@ -27,7 +27,7 @@
 .icon {}
 
 .cost {
-	@apply text-lg
+	@apply text-lg font-semibold
 }
 
 .description {

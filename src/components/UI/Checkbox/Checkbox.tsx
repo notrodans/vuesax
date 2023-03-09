@@ -8,10 +8,10 @@ import styles from "./Checkbox.module.css";
 import { CheckboxProps } from "./Checkbox.props";
 
 const Checkbox: FC<CheckboxProps> = props => {
-	const { rounded = true, className, children } = props;
+	const { rounded = true, className, children, ...checkBoxProps } = props;
 	const state = useToggleState(props);
 	const ref = useRef(null);
-	const { inputProps } = useCheckbox(props, state, ref);
+	const { inputProps } = useCheckbox(checkBoxProps, state, ref);
 	const { focusProps, isFocusVisible } = useFocusRing();
 
 	const checkBoxClassname = clsx(styles.box, {
@@ -25,7 +25,7 @@ const Checkbox: FC<CheckboxProps> = props => {
 			<VisuallyHidden>
 				<input ref={ref} {...mergeProps(inputProps, focusProps)} />
 			</VisuallyHidden>
-			<div className={checkBoxClassname} aria-hidden='true'></div>
+			<div className={checkBoxClassname} aria-hidden='true' />
 			<span className={styles.text} aria-hidden='true'>
 				{children}
 			</span>

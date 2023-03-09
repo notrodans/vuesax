@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FC } from "react";
+import { FC, memo } from "react";
 import styles from "./Title.module.css";
 import { TitleProps } from "./Title.props";
 
@@ -37,4 +37,4 @@ const Title: FC<TitleProps> = titleProps => {
 	}
 };
 
-export default Title;
+export default memo(Title);

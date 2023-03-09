@@ -18,6 +18,7 @@
 		"@tailwindcss/line-clamp": "0.4.2",
 		"clsx": "1.2.1",
 		"framer-motion": "^10.2.3",
+		"lodash.clonedeep": "^4.5.0",
 		"next": "13.2.3",
 		"npm": "^9.6.0",
 		"react": "18.2.0",
@@ -30,6 +31,7 @@
 	"devDependencies": {
 		"@react-types/shared": "^3.17.0",
 		"@tailwindcss/typography": "^0.5.9",
+		"@types/lodash.clonedeep": "^4.5.7",
 		"@types/node": "18.14.6",
 		"@types/react": "18.0.28",
 		"@types/react-dom": "18.0.11",

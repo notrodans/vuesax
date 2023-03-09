@@ -1,5 +1,6 @@
 import { Card } from "#/components/common";
 import { CardProps } from "#/components/common/Card/Card.props";
+import { Title } from "#/components/UI";
 import styles from "./categories.module.css";
 
 const cardFirst: CardProps = {
@@ -29,7 +30,9 @@ const cardThird: CardProps = {
 export default function Page() {
 	return (
 		<div className={styles.categories}>
-			<div className={styles.title}>7,618 results found</div>
+			<Title tag='h3' className={styles.title}>
+				7,618 results found
+			</Title>
 			<div className={styles.body}>
 				<Card {...cardFirst} />
 				<Card {...cardSecond} />

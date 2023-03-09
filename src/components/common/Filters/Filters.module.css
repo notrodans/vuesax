@@ -17,3 +17,5 @@
 .checkbox:not(:last-child) {
 	@apply mb-[15px]
 }
+
+.prices {}

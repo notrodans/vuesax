@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export const range = {
 	first: {
 		isSelected: true,
@@ -26,5 +28,7 @@ export const range = {
 	}
 };
 
-export type rangeType = typeof range;
-export type rangeKeys = keyof typeof range;
+export type rangeType = {
+	[key: string]: { isSelected: boolean; key: number; children: ReactNode | string };
+};
+export type rangeKeys<T> = keyof T;

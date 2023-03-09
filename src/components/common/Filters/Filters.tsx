@@ -1,34 +1,12 @@
 "use client";
 
-import { Button, Checkbox, Title } from "#/components/UI";
-import { useMemo, useState } from "react";
-import { range, rangeKeys, rangeType } from "./Filters.consts";
+import { Button, CheckboxsContainer, Title } from "#/components/UI";
+import { FC, useState } from "react";
+import { range, rangeType } from "./Filters.consts";
 import styles from "./Filters.module.css";
 
-const Filters = () => {
-	const [rangeSelected, setRangeSelected] = useState<rangeType>({ ...range });
-	const rangeSelectedEntries = useMemo(
-		() => Object.entries(rangeSelected) as [key: rangeKeys, value: rangeType[rangeKeys]][],
-		[rangeSelected]
-	);
-
-	const onChangeCheckbox = (key: rangeKeys) => {
-		if (rangeSelected[key].isSelected) {
-			setRangeSelected(prev => {
-				const obj = prev[key];
-				obj.isSelected = false;
-				const newPrev = { ...prev };
-				return newPrev;
-			});
-		} else {
-			setRangeSelected(prev => {
-				const obj = prev[key];
-				obj.isSelected = true;
-				const newPrev = { ...prev };
-				return newPrev;
-			});
-		}
-	};
+const Filters: FC = () => {
+	const [rangeSelected, setRangeSelected] = useState<rangeType | null>(range && { ...range });
 
 	return (
 		<div className={styles.filters}>
@@ -37,18 +15,11 @@ const Filters = () => {
 				<Title tag='h3' className={styles.title}>
 					Multi Range
 				</Title>
-				<div className={styles.prices}>
-					{rangeSelectedEntries.map(([key, value]) => (
-						<Checkbox
-							className={styles.checkbox}
-							key={key}
-							isSelected={value.isSelected}
-							onChange={() => onChangeCheckbox(key)}
-						>
-							{value.children}
-						</Checkbox>
-					))}
-				</div>
+				<CheckboxsContainer
+					className={styles.prices}
+					onChangeData={setRangeSelected}
+					data={rangeSelected}
+				/>
 			</div>
 			<Button rounded textTransform='upper'>
 				clear all filters

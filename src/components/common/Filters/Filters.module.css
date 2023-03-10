@@ -2,12 +2,24 @@
 	@apply flex-col flex
 }
 
+.header {
+	@apply flex items-center justify-between gap-x-3
+}
+
 .header:not(:last-child) {
-	@apply mb-5 flex justify-between gap-x-3
+	@apply mb-5
+}
+
+.header:first-child {
+	@apply md:mt-[6px]
+}
+
+.headerTitle {
+	@apply mb-0 !important
 }
 
 .openButton {
-	@apply w-10 h-10
+	@apply inline-flex w-10 h-10 md:hidden
 }
 
 .body {

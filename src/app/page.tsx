@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
 	return (
 		<div className='hero container'>
-			<Link href={"/categories"}>В Категории</Link>
+			<Link href={"/categories"}>Go to categories</Link>
 		</div>
 	);
 }

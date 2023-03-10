@@ -59,6 +59,7 @@ const CheckboxsContainer: FC<CheckboxsContainerProps> = props => {
 				{rangeSelectedEntries &&
 					rangeSelectedEntries.map(([key, value]) => (
 						<Checkbox
+							aria-label='checkbox'
 							className={styles.checkbox}
 							key={key}
 							isSelected={value.isSelected}

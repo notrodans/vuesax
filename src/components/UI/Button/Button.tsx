@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { mergeProps, useFocusRing, usePress } from "react-aria";
 import styles from "./Button.module.css";
 import { ButtonProps } from "./Button.props";
@@ -11,7 +11,7 @@ const Button: FC<ButtonProps> = props => {
 		icon,
 		iconRight,
 		weight = "400",
-		size = "normal",
+		size,
 		apperance = "primary",
 		rounded = false,
 		forceRounded = false,
@@ -30,8 +30,9 @@ const Button: FC<ButtonProps> = props => {
 				[styles.semiBold]: weight === "600",
 				[styles.primary]: apperance === "primary",
 				[styles.gray]: apperance === "gray",
-				[styles.normal]: size === "normal",
+				[styles.white]: apperance === "white",
 				[styles.small]: size === "small",
+				[styles.medium]: size === "medium",
 				[styles.rounded]: rounded,
 				[styles.fourceRounded]: forceRounded,
 				[styles.upper]: textTransform === "upper",
@@ -48,4 +49,4 @@ const Button: FC<ButtonProps> = props => {
 	);
 };
 
-export default Button;
+export default memo(Button);

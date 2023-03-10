@@ -32,7 +32,8 @@ const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 								<span className={styles.path} key={path}>
 									<Link
 										className={clsx(styles.link, {
-											[styles.active]: i === arr.length - 1
+											[styles.active]: i === arr.length - 1,
+											"pointer-events-none": i === arr.length - 1
 										})}
 										href={path}
 									>

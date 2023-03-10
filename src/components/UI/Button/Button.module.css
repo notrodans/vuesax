@@ -2,62 +2,78 @@
 	@apply inline-flex items-center justify-center gap-x-[10px] px-4 py-3 transition-colors outline-none
 }
 
-.button.light {
+.light {
 	@apply font-light
 }
 
-.button.regular {
+.regular {
 	@apply font-normal
 }
 
-.button.semiBold {
+.semiBold {
 	@apply font-semibold
 }
 
-.button.primary {
+.primary {
 	@apply bg-vuesax-purple text-vuesax-white hover:bg-vuesax-primary
 }
 
-.button.gray {
+.gray {
 	@apply bg-vuesax-gray text-vuesax-wood hover:bg-pink-400
 }
 
-.button.small {
-	@apply px-2 py-1
-}
-
-.button.rounded {
-	@apply rounded-lg
-}
-
-.button.fourceRounded {
-	@apply rounded-[50%]
-}
-
-.button.upper {
-	@apply uppercase
-}
-
-.button.capit {
-	@apply capitalize
-}
-
-.button.primary.focus {
+.primary.focus {
 	@apply bg-vuesax-primary
 }
 
-.button.gray.focus {
+.gray.focus {
 	@apply bg-pink-400
 }
 
-.button.primary.pressed {
+.primary.pressed {
 	@apply bg-vuesax-purple
 }
 
-.button.gray.pressed {
+.gray.pressed {
 	@apply bg-pink-600
 }
 
-.button.focus {
+.white {
+	@apply bg-vuesax-white text-vuesax-white hover:bg-gray-300
+}
+
+.white.focus {
+	@apply bg-gray-300
+}
+
+.white.pressed {
+	@apply bg-vuesax-white
+}
+
+.small {
+	@apply px-2 py-1
+}
+
+.medium {
+	@apply px-3 py-3
+}
+
+.rounded {
+	@apply rounded-lg
+}
+
+.fourceRounded {
+	@apply rounded-[50%]
+}
+
+.upper {
+	@apply uppercase
+}
+
+.capit {
+	@apply capitalize
+}
+
+.focus {
 	@apply outline outline-vuesax-white outline-offset-2 outline-2
 }

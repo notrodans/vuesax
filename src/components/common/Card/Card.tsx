@@ -1,3 +1,5 @@
+"use client";
+
 import { Heart, ShopBag, Star } from "#/components/icons";
 import { Button, Title } from "#/components/UI";
 import clsx from "clsx";

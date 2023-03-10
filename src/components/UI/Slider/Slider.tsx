@@ -76,4 +76,4 @@ const Thumb: FC<ThumbProps> = props => {
 	);
 };
 
-export default memo(Slider);
+export default Slider;

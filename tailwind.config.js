@@ -10,7 +10,6 @@ module.exports = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
-	darkMode: "class",
 	theme: {
 		screens: {
 			sm: "47.99875em",
@@ -31,7 +30,6 @@ module.exports = {
 			}
 		},
 		extend: {
-			height: "none",
 			fontFamily: {
 				sans: ["var(--primary-font)"]
 			},
@@ -46,6 +44,7 @@ module.exports = {
 			colors: {
 				vuesax: {
 					white: "#FFFFFF",
+					black: "#2F2F2F",
 					pink: "#FF0080",
 					darkBlue: "#0F1642",
 					cyan: "#50E3C2",

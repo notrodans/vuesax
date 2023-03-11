@@ -1,8 +1,16 @@
-import React from "react";
+import { FC } from "react";
+import { IconProps } from "./types";
 
-const Search = () => {
+const Search: FC<IconProps> = props => {
 	return (
-		<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<svg
+			{...props}
+			width='20'
+			height='20'
+			viewBox='0 0 20 20'
+			fill='none'
+			xmlns='http://www.w3.org/2000/svg'
+		>
 			<path
 				fillRule='evenodd'
 				clipRule='evenodd'

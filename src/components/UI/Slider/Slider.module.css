@@ -1,0 +1,22 @@
+.slider {
+}
+
+.label {
+	@apply flex justify-between gap-3;
+}
+
+.labelTitle {
+	@apply font-semibold;
+}
+
+.label:not(:last-child) {
+	@apply mb-3;
+}
+
+.track {
+	@apply h-1.5 rounded-[3px] bg-vuesax-purple;
+}
+
+.thumb {
+	@apply top-2/4 h-5 w-5 cursor-pointer rounded-[50%] bg-vuesax-purple;
+}

@@ -1,0 +1,72 @@
+.card {
+	@apply flex flex-col rounded-lg bg-vuesax-darkBlue p-5;
+}
+
+.image {
+	@apply self-center;
+}
+
+.image:not(:last-child) {
+	@apply mb-[35px];
+}
+
+.body {
+	@apply flex flex-auto flex-col;
+}
+
+.header {
+	@apply flex justify-between gap-3;
+}
+
+.header:not(:last-child) {
+	@apply mb-5;
+}
+
+.rating {
+}
+
+.icon {
+}
+
+.cost {
+	@apply text-lg font-semibold;
+}
+
+.description {
+	@apply flex-auto;
+}
+
+.description:not(:last-child) {
+	@apply mb-5;
+}
+
+.title {
+}
+
+.title:not(:last-child) {
+	@apply mb-[5px];
+}
+
+.text {
+	@apply line-clamp-2;
+}
+
+.buttons {
+	@apply m-[-20px] mt-0 flex flex-col sm:flex-row;
+}
+
+.button {
+	@apply flex-shrink-0 flex-grow-0 basis-6/12;
+}
+
+.ratingButton {
+	@apply rounded-[3px];
+}
+
+.wishButton {
+	@apply sm:rounded-bl-lg;
+}
+
+.addButton {
+	@apply rounded-b-lg sm:rounded-br-lg sm:rounded-bl-none;
+}

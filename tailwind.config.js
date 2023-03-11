@@ -11,25 +11,25 @@ module.exports = {
 		hoverOnlyWhenSupported: true
 	},
 	theme: {
-		screens: {
-			sm: "47.99875em",
-			md: "61.99875em",
-			lg: "80em",
-			xl: "90em",
-			"2xl": "98.1250em"
-		},
-		container: {
-			padding: "0.9375rem",
-			center: true,
+		extend: {
 			screens: {
-				sm: "61.99875em",
-				md: "64em",
+				sm: "47.99875em",
+				md: "61.99875em",
 				lg: "80em",
 				xl: "90em",
 				"2xl": "98.1250em"
-			}
-		},
-		extend: {
+			},
+			container: {
+				padding: "0.9375rem",
+				center: true,
+				screens: {
+					sm: "61.99875em",
+					md: "64em",
+					lg: "80em",
+					xl: "90em",
+					"2xl": "98.1250em"
+				}
+			},
 			fontFamily: {
 				sans: ["var(--primary-font)"]
 			},

@@ -1,79 +1,82 @@
 .button {
-	@apply inline-flex items-center justify-center gap-x-[10px] px-4 py-3 transition-colors outline-none
+	@apply inline-flex items-center justify-center gap-x-[10px] px-4 py-3  outline-none transition-colors;
 }
 
 .light {
-	@apply font-light
+	@apply font-light;
 }
 
 .regular {
-	@apply font-normal
+	@apply font-normal;
 }
 
 .semiBold {
-	@apply font-semibold
+	@apply font-semibold;
 }
 
 .primary {
-	@apply bg-vuesax-purple text-vuesax-white hover:bg-vuesax-primary
+	@apply bg-vuesax-purple text-vuesax-white hover:bg-vuesax-primary;
 }
 
 .gray {
-	@apply bg-vuesax-gray text-vuesax-wood hover:bg-pink-400
+	@apply bg-vuesax-gray text-vuesax-wood hover:bg-pink-400;
 }
 
 .primary.focus {
-	@apply bg-vuesax-primary
+	@apply bg-vuesax-primary;
 }
 
 .gray.focus {
-	@apply bg-pink-400
+	@apply bg-pink-400;
 }
 
 .primary.pressed {
-	@apply bg-vuesax-purple
+	@apply bg-vuesax-purple;
 }
 
 .gray.pressed {
-	@apply bg-pink-600
+	@apply bg-pink-600;
 }
 
 .white {
-	@apply bg-vuesax-white text-vuesax-white hover:bg-gray-300
+	@apply bg-vuesax-white text-vuesax-white hover:bg-gray-300;
 }
 
 .white.focus {
-	@apply bg-gray-300
+	@apply bg-gray-300;
 }
 
 .white.pressed {
-	@apply bg-vuesax-white
+	@apply bg-vuesax-white;
 }
 
 .small {
-	@apply px-2 py-1
+	@apply px-2 py-1;
 }
 
 .medium {
-	@apply px-3 py-3
+	@apply px-3 py-3;
 }
 
 .rounded {
-	@apply rounded-lg
+	@apply rounded-lg;
+}
+
+.button.custom {
 }
 
 .fourceRounded {
-	@apply rounded-[50%]
+	@apply rounded-[50%];
 }
 
 .upper {
-	@apply uppercase
+	@apply uppercase;
 }
 
 .capit {
-	@apply capitalize
+	@apply capitalize;
 }
 
 .focus {
-	@apply outline outline-vuesax-white outline-offset-2 outline-2
+	@apply outline outline-2 outline-offset-2 outline-vuesax-white;
 }

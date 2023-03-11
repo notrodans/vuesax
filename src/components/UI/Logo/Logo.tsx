@@ -11,8 +11,7 @@ const Logo: FC<LogoProps> = () => {
 				width={38}
 				height={27}
 				style={{
-					width: "auto",
-					height: "1.6875rem",
+					height: "27",
 					aspectRatio: "38/27",
 					objectFit: "contain"
 				}}

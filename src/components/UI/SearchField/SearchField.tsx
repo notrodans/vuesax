@@ -1,13 +1,13 @@
 "use client";
 
+import { Search } from "#/components/icons";
+import clsx from "clsx";
 import { FC, useRef } from "react";
 import { useSearchField } from "react-aria";
 import { useSearchFieldState } from "react-stately";
-import { SearchFieldProps } from "./SearchField.props";
-import styles from "./SearchField.module.css";
-import clsx from "clsx";
 import Button from "../Button/Button";
-import { Search } from "#/components/icons";
+import styles from "./SearchField.module.css";
+import { SearchFieldProps } from "./SearchField.props";
 
 const SearchField: FC<SearchFieldProps> = props => {
 	const { label, className, ...searchFieldProps } = props;
@@ -19,7 +19,7 @@ const SearchField: FC<SearchFieldProps> = props => {
 		clearButtonProps: buttonProps
 	} = useSearchField(searchFieldProps, state, ref);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { onPressStart, excludeFromTabOrder, ...clearButtonProps } = buttonProps;
+	const { excludeFromTabOrder, ...clearButtonProps } = buttonProps;
 
 	return (
 		<div className={clsx(styles.container, className)}>

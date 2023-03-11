@@ -33,6 +33,7 @@ const Button: FC<ButtonProps> = props => {
 				[styles.white]: apperance === "white",
 				[styles.small]: size === "small",
 				[styles.medium]: size === "medium",
+				[styles.custom]: size === "custom",
 				[styles.rounded]: rounded,
 				[styles.fourceRounded]: forceRounded,
 				[styles.upper]: textTransform === "upper",

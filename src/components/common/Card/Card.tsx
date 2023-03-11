@@ -22,6 +22,7 @@ const Card: FC<CardProps> = props => {
 				sizes='100vw'
 				style={{
 					height: 273,
+					aspectRatio: "220 / 273",
 					objectFit: "contain"
 				}}
 				priority

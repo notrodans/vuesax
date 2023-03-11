@@ -1,41 +1,38 @@
 .filters {
-	@apply flex-col flex
+	@apply flex flex-col;
 }
 
 .header {
-	@apply flex items-center justify-between gap-x-3
+	@apply flex items-center justify-between gap-x-3;
 }
 
 .header:not(:last-child) {
-	@apply mb-5
-}
-
-.header:first-child {
-	@apply md:mt-[6px]
+	@apply mb-3 2xl:mb-[25px];
 }
 
 .headerTitle {
-	@apply mb-0 !important
+	@apply mb-0 !important;
 }
 
 .openButton {
-	@apply inline-flex w-10 h-10 md:hidden
+	@apply inline-flex h-10 w-10 md:hidden;
 }
 
 .body {
-	@apply max-md:hidden rounded-lg bg-vuesax-darkBlue p-[25px] h-full
+	@apply h-full rounded-lg bg-vuesax-darkBlue max-md:h-0;
 }
 
-.body:not(:last-child) {
-	@apply mb-[30px]
+.active {
+	@apply p-[25px];
+}
+
+.active:not(:last-child) {
+	@apply mb-[30px];
 }
 
 .checkbox:not(:last-child) {
-	@apply mb-[15px]
+	@apply mb-[15px];
 }
 
-.prices {}
-
-.active {
-	@apply block
+.prices {
 }

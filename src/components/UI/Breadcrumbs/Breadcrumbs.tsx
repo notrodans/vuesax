@@ -14,37 +14,32 @@ const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 	const pathsIsValid = paths[paths.length - 1];
 
 	return (
-		<div className={styles.breadcrumbs}>
-			<div className={clsx(styles.container, "container")}>
-				<div className={styles.body}>
-					<div className={styles.category}>Breadcrumbs</div>
-					<span className={styles.vDivider}></span>
-					<div className={styles.goBack}>
-						<Link href={"/"}>
-							<Home />
-						</Link>
-						{pathsIsValid && <Arrows />}
-					</div>
-					{pathsIsValid &&
-						paths.map((p, i, arr) => {
-							const path = `/${arr.slice(0, i + 1).join("/")}`;
-							return (
-								<span className={styles.path} key={path}>
-									<Link
-										className={clsx(styles.link, {
-											[styles.active]: i === arr.length - 1,
-											"pointer-events-none": i === arr.length - 1
-										})}
-										href={path}
-									>
-										{p}
-									</Link>
-									{i !== arr.length - 1 && <Arrows />}
-								</span>
-							);
-						})}
-				</div>
+		<div className={clsx(styles.breadcrumbs, "container")}>
+			<div className={styles.category}>Breadcrumbs</div>
+			<span className={styles.vDivider}></span>
+			<div className={styles.goBack}>
+				<Link href={"/"}>
+					<Home />
+				</Link>
+				{pathsIsValid && <Arrows />}
 			</div>
+			{pathsIsValid &&
+				paths.map((p, i, arr) => {
+					const path = `/${arr.slice(0, i + 1).join("/")}`;
+					return (
+						<span className={styles.path} key={path}>
+							<Link
+								className={clsx(styles.link, {
+									[styles.active]: i === arr.length - 1
+								})}
+								href={path}
+							>
+								{p}
+							</Link>
+							{i !== arr.length - 1 && <Arrows />}
+						</span>
+					);
+				})}
 		</div>
 	);
 };

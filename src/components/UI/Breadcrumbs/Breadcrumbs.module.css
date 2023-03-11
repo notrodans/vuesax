@@ -1,35 +1,31 @@
 .breadcrumbs {
-	@apply mb-6 lg:mb-[50px];
-}
-
-.body {
-	@apply flex content-baseline items-center gap-x-[10px] overflow-x-auto;
+	@apply flex gap-x-[10px] items-center content-baseline
 }
 
 .category {
-	@apply text-2xl font-semibold capitalize;
+	@apply capitalize
 }
 
 .vDivider {
-	@apply w-[1px] self-stretch bg-[#979797];
+
 }
 
 .goBack {
-	@apply flex items-center gap-x-[10px];
+	@apply flex items-center gap-x-[10px]
 }
 
 .goBack svg {
-	@apply mt-[-1px];
+	@apply mt-[-1px]
 }
 
 .path {
-	@apply flex items-center gap-x-[10px];
+	@apply flex items-center gap-x-[10px]
 }
 
 .link {
-	@apply font-semibold capitalize;
+	@apply capitalize
 }
 
 .active {
-	@apply text-vuesax-primary;
+	@apply text-vuesax-violet
 }

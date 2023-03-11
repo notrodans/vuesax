@@ -1,7 +1,7 @@
 .wrapper {
-	@apply flex min-h-screen flex-col overflow-hidden;
+	@apply flex flex-col overflow-hidden min-h-screen
 }
 
 .page {
-	@apply flex-auto;
+	@apply flex-auto
 }

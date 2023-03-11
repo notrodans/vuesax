@@ -1,7 +1,7 @@
 .user {
-	@apply flex items-center gap-x-[10px];
+	@apply flex gap-x-[10px] items-center
 }
 
 .title {
-	@apply text-[14px];
+	@apply text-[14px]
 }

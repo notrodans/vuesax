@@ -1,70 +1,37 @@
 const colors = require("tailwindcss/colors");
 
-const pxToRem = px => {
-	return `${px / 16}rem`;
-};
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}"],
 	future: {
 		hoverOnlyWhenSupported: true
 	},
+	darkMode: "class",
 	theme: {
 		extend: {
-			screens: {
-				sm: "47.99875em",
-				md: "61.99875em",
-				lg: "80em",
-				xl: "90em",
-				"2xl": "98.1250em"
-			},
-			container: {
-				padding: "0.9375rem",
-				center: true,
-				screens: {
-					sm: "61.99875em",
-					md: "64em",
-					lg: "80em",
-					xl: "90em",
-					"2xl": "98.1250em"
-				}
-			},
 			fontFamily: {
 				sans: ["var(--primary-font)"]
 			},
-			container: {
-				padding: "0.9375rem",
-				center: true,
-				screens: {
-					none: "auto",
-					"2xl": "98.1250em"
-				}
-			},
 			colors: {
+				gray: colors.zinc,
+				"gray-1000": "rgb(17,17,19)",
+				"gray-1100": "rgb(10,10,11)",
 				vuesax: {
 					white: "#FFFFFF",
-					black: "#2F2F2F",
 					pink: "#FF0080",
 					darkBlue: "#0F1642",
 					cyan: "#50E3C2",
 					orange: "#FFA84C",
 					violet: "#7928CA",
-					purple: "#6F64F8",
 					primary: "#7E72F2",
-					gray: "#B8C2CC",
-					wood: "#2C2C20",
 					bluewood: "#2B3253"
 				}
 			},
 			backgroundImage: ({ theme }) => ({
-				"vc-border-gradient": `radial-gradient(at left top, ${theme("colors.gray.500")}, ${pxToRem(
-					50
-				)}, ${theme("colors.gray.800")} 50%)`
+				"vc-border-gradient": `radial-gradient(at left top, ${theme(
+					"colors.gray.500"
+				)}, 50px, ${theme("colors.gray.800")} 50%)`
 			}),
-			gridTemplateColumns: {
-				categories: `minmax(${pxToRem(200)}, ${pxToRem(370)}) 1fr`
-			},
 			keyframes: ({ theme }) => ({
 				rerender: {
 					"0%": {

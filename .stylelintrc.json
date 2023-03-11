@@ -1,12 +1,7 @@
 {
-	"extends": [
-		"stylelint-config-recommended-scss",
-		"stylelint-config-rational-order",
-		"stylelint-prettier/recommended"
-	],
-	"plugins": ["stylelint-order", "stylelint-prettier"],
+	"extends": ["stylelint-config-recommended-scss", "stylelint-config-rational-order"],
+	"plugins": ["stylelint-order"],
 	"rules": {
-		"prettier/prettier": true,
 		"indentation": "tab",
 		"color-hex-case": "upper",
 		"block-no-empty": null,

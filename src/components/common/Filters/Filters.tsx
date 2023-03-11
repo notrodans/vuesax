@@ -3,11 +3,15 @@
 import { Settings } from "#/components/icons";
 import { Button, CheckboxsContainer, Divider, Slider, Title } from "#/components/UI";
 import { CheckboxProps } from "#/components/UI/Checkbox/Checkbox.props";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import _cloneDeep from "lodash.clonedeep";
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { range, rangeSecond, rangeType } from "./Filters.consts";
 import styles from "./Filters.module.css";
+import { variants } from "./Filters.variants";
+
+const checkBoxProps: CheckboxProps = { rounded: true };
 
 const Filters: FC = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -21,7 +25,9 @@ const Filters: FC = () => {
 		setSliderState(value);
 	};
 
-	const checkBoxProps: CheckboxProps = useMemo(() => ({ rounded: true }), []);
+	const onHandleOpen = () => {
+		setIsOpen(prev => !prev);
+	};
 
 	const onClearAllFilters = useCallback(() => {
 		setRangeSelected(_cloneDeep(range));
@@ -30,14 +36,27 @@ const Filters: FC = () => {
 	}, []);
 
 	return (
-		<motion.div layout className={styles.filters}>
+		<div className={styles.filters}>
 			<div className={styles.header}>
 				<Title tag='h3' className={styles.headerTitle}>
 					Filters
 				</Title>
-				<Button size='small' forceRounded icon={<Settings />} className={styles.openButton} />
+				<Button
+					onClick={onHandleOpen}
+					size='small'
+					forceRounded
+					icon={<Settings />}
+					className={styles.openButton}
+				/>
 			</div>
-			<div className={styles.body}>
+			<motion.div
+				variants={variants}
+				initial={isOpen ? "visible" : "hidden"}
+				animate={isOpen ? "visible" : "hidden"}
+				className={clsx(styles.body, {
+					[styles.active]: isOpen
+				})}
+			>
 				<Title tag='h3' className={styles.title}>
 					Multi Range
 				</Title>
@@ -81,11 +100,11 @@ const Filters: FC = () => {
 				<Title tag='h3' className={styles.title}>
 					Rating
 				</Title>
-			</div>
+			</motion.div>
 			<Button onClick={onClearAllFilters} rounded textTransform='upper'>
 				clear all filters
 			</Button>
-		</motion.div>
+		</div>
 	);
 };
 

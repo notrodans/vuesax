@@ -1,27 +1,27 @@
 .tag {
-	@apply text-vuesax-white m-0
+	@apply m-0 text-vuesax-white;
 }
 
 .h1.margin:not(:last-child) {
-	@apply mb-[5px]
+	@apply mb-[5px];
 }
 
 .h2.margin:not(:last-child) {
-	@apply mb-[10px]
+	@apply mb-[10px];
 }
 
 .h3.margin:not(:last-child) {
-	@apply mb-[15px]
+	@apply mb-[15px];
 }
 
 .tag.small {
-	@apply text-base
+	@apply text-base;
 }
 
 .tag.medium {
-	@apply text-lg
+	@apply text-lg;
 }
 
 .tag.large {
-	@apply text-xl
+	@apply text-xl;
 }

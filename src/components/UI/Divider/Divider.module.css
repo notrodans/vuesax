@@ -1,11 +1,11 @@
 .divider {
-	@apply border-solid border-[#D6D6D6] 
+	@apply border-solid border-[#D6D6D6];
 }
 
 .divider:not(:last-child) {
-	@apply mb-[30px]
+	@apply mb-[30px];
 }
 
 .divider:not(:first-child) {
-	@apply mt-[30px]
+	@apply mt-[30px];
 }

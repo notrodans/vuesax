@@ -1,8 +1,11 @@
 import { Footer, Header } from "#/components/common";
 import { Breadcrumbs } from "#/components/UI";
+import { SessionProvider } from "#/layouts/SessionProvider";
 import { SSRProvider } from "#/layouts/SSRProvider";
 import "#/styles/globals.css";
+import { getServerSession } from "next-auth";
 import { Montserrat } from "next/font/google";
+import { options } from "#/../pages/api/auth/[...nextauth]";
 import styles from "./styles.module.css";
 
 export const metadata = {
@@ -16,7 +19,9 @@ const primaryFont = Montserrat({
 	style: "normal"
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	const session = await getServerSession(options);
+
 	return (
 		<html className={`${primaryFont.variable}`} lang='en'>
 			<head>
@@ -24,12 +29,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			</head>
 			<body>
 				<SSRProvider>
-					<div className={styles.wrapper}>
-						<Header />
-						<Breadcrumbs />
-						<main className={styles.page}>{children}</main>
-						<Footer />
-					</div>
+					<SessionProvider session={session}>
+						<div className={styles.wrapper}>
+							<Header />
+							<Breadcrumbs />
+							<main className={styles.page}>{children}</main>
+							<Footer />
+						</div>
+					</SessionProvider>
 				</SSRProvider>
 			</body>
 		</html>

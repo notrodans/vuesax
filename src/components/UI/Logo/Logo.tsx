@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { FC } from "react";
+import { FC } from "react";
 import styles from "./Logo.module.css";
 import { LogoProps } from "./Logo.props";
 

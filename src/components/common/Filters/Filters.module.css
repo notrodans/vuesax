@@ -7,7 +7,7 @@
 }
 
 .header:not(:last-child) {
-	@apply mb-3 2xl:mb-[25px];
+	@apply mb-3 2xl:mb-[26px];
 }
 
 .headerTitle {

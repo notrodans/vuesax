@@ -10,8 +10,8 @@ import { BreadcrumbsProps } from "./Breadcrumbs.props";
 
 const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 	const pathname = usePathname();
-	const paths = pathname.slice(1).split("/");
-	const pathsIsValid = paths[paths.length - 1];
+	const paths = pathname?.slice(1).split("/");
+	const pathsIsValid = paths?.[paths.length - 1];
 
 	return (
 		<div className={styles.breadcrumbs}>

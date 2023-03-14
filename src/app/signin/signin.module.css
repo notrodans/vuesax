@@ -1,0 +1,28 @@
+.signin {
+	@apply flex-1 py-8 text-vuesax-darkBlue;
+}
+
+.container {
+	@apply h-full rounded-lg;
+}
+
+.body {
+	@apply flex h-full justify-between max-xl:flex-col-reverse;
+}
+
+.left,
+.right {
+	@apply flex-1 basis-6/12;
+}
+
+.right {
+	@apply bg-vuesax-white px-[15px] py-2;
+}
+
+.left {
+	@apply relative overflow-hidden rounded-bl-lg rounded-tl-lg bg-vuesax-darkBlue;
+}
+
+.left svg {
+	@apply absolute top-0 left-0 fill-vuesax-cyan stroke-vuesax-violet object-cover xl:h-full;
+}

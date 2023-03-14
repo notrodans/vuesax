@@ -1,11 +1,11 @@
 "use client";
 
 import { Search } from "#/components/icons";
+import { Button } from "#/components/UI";
 import clsx from "clsx";
 import { FC, useRef } from "react";
 import { useSearchField } from "react-aria";
 import { useSearchFieldState } from "react-stately";
-import Button from "../Button/Button";
 import styles from "./SearchField.module.css";
 import { SearchFieldProps } from "./SearchField.props";
 

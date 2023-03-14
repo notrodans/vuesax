@@ -4,6 +4,7 @@ import { Heart, ShopBag, Star } from "#/components/icons";
 import { Button, Title } from "#/components/UI";
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import styles from "./Card.module.css";
 import { CardProps } from "./Card.props";
@@ -13,21 +14,22 @@ const Card: FC<CardProps> = props => {
 
 	return (
 		<div className={clsx(styles.card, className)} {...cardProps}>
-			<div className={styles.image}></div>
-			<Image
-				className={clsx(styles.image)}
-				src={image}
-				width={220}
-				height={273}
-				sizes='100vw'
-				style={{
-					height: 273,
-					aspectRatio: "220 / 273",
-					objectFit: "contain"
-				}}
-				priority
-				alt={"card"}
-			/>
+			<Link href='#' className={styles.image}>
+				<Image
+					className={clsx(styles.image)}
+					src={image}
+					width={220}
+					height={273}
+					sizes='100vw'
+					style={{
+						height: 273,
+						aspectRatio: "220 / 273",
+						objectFit: "contain"
+					}}
+					priority
+					alt={"card"}
+				/>
+			</Link>
 			<div className={styles.body}>
 				<div className={styles.header}>
 					<Button size='small' weight='600' iconRight={<Star />} className={styles.ratingButton}>

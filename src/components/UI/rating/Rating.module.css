@@ -1,0 +1,19 @@
+.rating {
+	@apply relative;
+}
+
+.star svg {
+	@apply inline-block stroke-vuesax-white;
+}
+
+.filled svg {
+	@apply stroke-vuesax-orange;
+}
+
+span:not(:last-child) > .star {
+	@apply pr-[5px];
+}
+
+.editable {
+	cursor: pointer;
+}

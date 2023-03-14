@@ -1,6 +1,6 @@
 import { rangeType } from "#/components/common/Filters/Filters.consts";
+import { CheckboxProps } from "#/components/UI/checkbox/Checkbox.props";
 import { DetailedHTMLProps, Dispatch, HTMLAttributes, ReactNode, SetStateAction } from "react";
-import { CheckboxProps } from "../Checkbox/Checkbox.props";
 
 export interface CheckboxsContainerProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

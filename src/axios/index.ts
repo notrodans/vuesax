@@ -1,1 +1,1 @@
-export { default as withJWT } from "./withJWT";
+export { default as getInstance } from "./axios";

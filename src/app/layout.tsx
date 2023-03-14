@@ -1,12 +1,9 @@
-import { Footer, Header } from "#/components/common";
-import { Breadcrumbs } from "#/components/UI";
+import { options } from "#/../pages/api/auth/[...nextauth]";
 import { SessionProvider } from "#/layouts/SessionProvider";
 import { SSRProvider } from "#/layouts/SSRProvider";
 import "#/styles/globals.css";
 import { getServerSession } from "next-auth";
 import { Montserrat } from "next/font/google";
-import { options } from "#/../pages/api/auth/[...nextauth]";
-import styles from "./styles.module.css";
 
 export const metadata = {
 	title: "Vuesax | eCommerce shop"
@@ -29,13 +26,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 			</head>
 			<body>
 				<SSRProvider>
-					<SessionProvider session={session}>
-						<div className={styles.wrapper}>
-							<Header />
-							<Breadcrumbs />
-							<main className={styles.page}>{children}</main>
-							<Footer />
-						</div>
+					<SessionProvider session={session} refetchInterval={5 * 60}>
+						{children}
 					</SessionProvider>
 				</SSRProvider>
 			</body>

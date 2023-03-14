@@ -7,9 +7,6 @@
 	"plugins": ["stylelint-order", "stylelint-prettier"],
 	"rules": {
 		"prettier/prettier": true,
-		"indentation": "tab",
-		"color-hex-case": "upper",
-		"block-no-empty": null,
 		"scss/at-rule-no-unknown": [
 			true,
 			{

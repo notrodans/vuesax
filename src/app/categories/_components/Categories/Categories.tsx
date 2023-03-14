@@ -39,7 +39,7 @@ export const Categories: FC = () => {
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
-			setIsGrid((localStorage.getItem("isGrid") === "true" ? true : false) || false);
+			setIsGrid((localStorage.getItem("isGrid") === "true" ? true : false) ?? false);
 			setIsLoading(false);
 		}
 	}, []);

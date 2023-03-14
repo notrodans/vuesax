@@ -1,8 +1,8 @@
 "use client";
 
 import { Settings } from "#/components/icons";
-import { Button, CheckboxsContainer, Divider, Slider, Title } from "#/components/UI";
-import { CheckboxProps } from "#/components/UI/Checkbox/Checkbox.props";
+import { Button, CheckboxsContainer, Divider, Rating, Slider, Title } from "#/components/UI";
+import { CheckboxProps } from "#/components/UI/checkbox/Checkbox.props";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import _cloneDeep from "lodash.clonedeep";
@@ -15,6 +15,7 @@ const checkBoxProps: CheckboxProps = { rounded: true };
 
 const Filters: FC = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(true);
+	const [rating, setRating] = useState(1);
 	const [rangeSelected, setRangeSelected] = useState<rangeType | null>(_cloneDeep(range));
 	const [rangeSecondSelected, setRangeSecondSelected] = useState<rangeType | null>(
 		_cloneDeep(rangeSecond)
@@ -100,6 +101,7 @@ const Filters: FC = () => {
 				<Title tag='h3' className={styles.title}>
 					Rating
 				</Title>
+				<Rating isEditable setRating={setRating} rating={rating} />
 			</motion.div>
 			<Button onClick={onClearAllFilters} rounded textTransform='upper'>
 				clear all filters

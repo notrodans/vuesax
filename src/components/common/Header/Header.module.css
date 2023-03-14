@@ -17,3 +17,7 @@
 .right {
 	@apply flex gap-x-[30px];
 }
+
+.right.loading {
+	@apply self-stretch;
+}

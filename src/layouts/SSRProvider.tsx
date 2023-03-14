@@ -1,9 +1,8 @@
 "use client";
 
-import { SSRProvider as SSRProviderAria } from "@react-aria/ssr";
+import { FC } from "react";
+import { SSRProvider as SSRProviderAria, SSRProviderProps } from "react-aria";
 
-import { FC, PropsWithChildren } from "react";
-
-export const SSRProvider: FC<PropsWithChildren> = ({ children }) => {
-	return <SSRProviderAria>{children}</SSRProviderAria>;
+export const SSRProvider: FC<SSRProviderProps> = ({ children, ...props }) => {
+	return <SSRProviderAria {...props}>{children}</SSRProviderAria>;
 };

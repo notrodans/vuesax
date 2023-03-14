@@ -1,9 +1,9 @@
 "use client";
 
 import { rangeKeys, rangeType } from "#/components/common/Filters/Filters.consts";
+import { Checkbox } from "#/components/UI";
 import clsx from "clsx";
 import { FC, memo, useMemo } from "react";
-import Checkbox from "../Checkbox/Checkbox";
 import styles from "./CheckboxsContainer.module.css";
 import { CheckboxsContainerProps } from "./CheckboxsContainer.props";
 

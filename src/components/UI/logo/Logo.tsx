@@ -3,9 +3,9 @@ import { FC } from "react";
 import styles from "./Logo.module.css";
 import { LogoProps } from "./Logo.props";
 
-const Logo: FC<LogoProps> = () => {
+const Logo: FC<LogoProps> = props => {
 	return (
-		<div className={styles.logo}>
+		<div className={styles.logo} {...props}>
 			<Image
 				src={"/logo.png"}
 				width={38}

@@ -1,4 +1,4 @@
-import { withJWT } from "#/axios";
+import axios from "axios";
 import { decode } from "jsonwebtoken";
 import NextAuth, { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -13,15 +13,14 @@ export const options: AuthOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const response = await fetch("http://localhost:3001/api/auth/login", {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify(credentials)
-					});
-					const { user, tokens } = await response.json();
+					const { data } = await axios.post(
+						process.env.NEXT_PUBLIC_API_URL + "/auth/login",
+						credentials
+					);
+					const { user, tokens } = data;
 					return { user, ...tokens };
 				} catch (err) {
-					console.log(err);
+					if (axios.isAxiosError(err)) console.log(err.response?.data.message);
 				}
 			}
 		})
@@ -36,12 +35,6 @@ export const options: AuthOptions = {
 		async jwt({ token, user }) {
 			if (user) {
 				token = {
-					id: user.user.id,
-					email: user.user.email,
-					name: user.user.login,
-					firstName: user.user.firstName,
-					lastName: user.user.lastName,
-					image: "/avatar.png",
 					accessToken: user.accessToken,
 					refreshToken: user.refreshToken
 				};
@@ -56,32 +49,33 @@ export const options: AuthOptions = {
 				};
 
 				if (decodedToken && decodedToken.exp < currentTime) {
-					const { data } = await withJWT.post(
-						"auth/refresh",
-						{
-							refreshToken: token.refreshToken
-						},
-						{
-							headers: {
-								Authorization: `Bearer ${token.refreshToken}`
+					try {
+						const { data } = await axios.post(
+							process.env.NEXT_PUBLIC_API_URL + "/auth/refresh",
+							{
+								refreshToken: token.refreshToken
+							},
+							{
+								headers: {
+									Authorization: `Bearer ${token.refreshToken}`
+								}
 							}
-						}
-					);
-					token.accessToken = data.accessToken;
-					token.refreshToken = data.refreshToken;
+						);
+						token.accessToken = data.accessToken;
+						return token;
+					} catch (err) {
+						if (axios.isAxiosError(err))
+							if (err.response?.status === 401) {
+								console.log(err.response.data.message);
+							}
+					}
 				}
 			}
 			return token;
 		},
 		async session({ session, token }) {
-			const { name, ...newSession } = session.user;
-			newSession.login = token.name;
-			newSession.image = "/avatar.png";
-			newSession.firstName = token.firstName;
-			newSession.lastName = token.lastName;
-			newSession.accessToken = token.accessToken;
-			newSession.refreshToken = token.refreshToken;
-			session.user = newSession;
+			session.user.accessToken = token.accessToken;
+			session.user.refreshToken = token.refreshToken;
 			return session;
 		}
 	}

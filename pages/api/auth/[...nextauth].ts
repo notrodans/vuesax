@@ -18,15 +18,16 @@ export const options: AuthOptions = {
 						credentials
 					);
 					const { user, tokens } = data;
-					return { user, ...tokens };
+					return { ...user, ...tokens };
 				} catch (err) {
-					if (axios.isAxiosError(err)) console.log(err.response?.data.message);
+					if (axios.isAxiosError(err)) throw new Error(err.response?.data.message);
 				}
 			}
 		})
 	],
 	session: {
-		strategy: "jwt"
+		strategy: "jwt",
+		maxAge: 15 * 60 * 60 * 24
 	},
 	jwt: {
 		secret: process.env.NEXTAUTH_SECRET
@@ -34,11 +35,9 @@ export const options: AuthOptions = {
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
-				token = {
-					accessToken: user.accessToken,
-					refreshToken: user.refreshToken
+				return {
+					...user
 				};
-				return token;
 			}
 			if (token) {
 				const currentTime = Math.floor(Date.now() / 1000);
@@ -47,22 +46,12 @@ export const options: AuthOptions = {
 					iat: number;
 					exp: number;
 				};
-
 				if (decodedToken && decodedToken.exp < currentTime) {
 					try {
-						const { data } = await axios.post(
-							process.env.NEXT_PUBLIC_API_URL + "/auth/refresh",
-							{
-								refreshToken: token.refreshToken
-							},
-							{
-								headers: {
-									Authorization: `Bearer ${token.refreshToken}`
-								}
-							}
-						);
+						const { data } = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/auth/refresh", {
+							refreshToken: token.refreshToken
+						});
 						token.accessToken = data.accessToken;
-						return token;
 					} catch (err) {
 						if (axios.isAxiosError(err))
 							if (err.response?.status === 401) {
@@ -74,8 +63,9 @@ export const options: AuthOptions = {
 			return token;
 		},
 		async session({ session, token }) {
-			session.user.accessToken = token.accessToken;
-			session.user.refreshToken = token.refreshToken;
+			session.user = {
+				...token
+			};
 			return session;
 		}
 	}

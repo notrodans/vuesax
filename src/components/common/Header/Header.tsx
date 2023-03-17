@@ -3,15 +3,15 @@
 import { User } from "#/components/common";
 import { Bell, Search } from "#/components/icons";
 import { Logo } from "#/components/UI";
-import { useUser } from "#/hooks/useUser";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
 import styles from "./Header.module.css";
 import { HeaderProps } from "./Header.props";
 
 const Header: FC<HeaderProps> = () => {
-	const { data, isLoading } = useUser();
+	const { data, status } = useSession();
 
 	return (
 		<header className={styles.header}>
@@ -22,14 +22,14 @@ const Header: FC<HeaderProps> = () => {
 					</Link>
 					<div
 						className={clsx(styles.right, {
-							[styles.loading]: isLoading
+							[styles.loading]: status
 						})}
 					>
-						{isLoading ? (
+						{status === "loading" ? (
 							<div
 								className={clsx("h-[34px] rounded-2xl bg-vuesax-bluewood", {
 									"relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent":
-										isLoading
+										status
 								})}
 							>
 								<div className='space-y-3'>
@@ -46,7 +46,11 @@ const Header: FC<HeaderProps> = () => {
 										<Bell />
 									</button>
 								</div>
-								<User firstName={data?.firstName} lastName={data?.lastName} avatar={data?.image} />
+								<User
+									firstName={data.user?.firstName}
+									lastName={data.user?.lastName}
+									avatar={data.user?.image}
+								/>
 							</>
 						) : (
 							<Link href={"/signin"}>Log in</Link>

@@ -12,16 +12,16 @@ export const options: AuthOptions = {
 				password: { label: "Password", type: "password" }
 			},
 			async authorize(credentials) {
-				try {
-					const { data } = await axios.post(
-						process.env.NEXT_PUBLIC_API_URL + "/auth/login",
-						credentials
-					);
+				const { data } = await axios.post(
+					process.env.NEXT_PUBLIC_API_URL + "/auth/login",
+					credentials
+				);
+				if (data) {
 					const { user, tokens } = data;
-					return { ...user, ...tokens };
-				} catch (err) {
-					if (axios.isAxiosError(err)) throw new Error(err.response?.data.message);
+					const role = user.role;
+					return { role, ...tokens };
 				}
+				return null;
 			}
 		})
 	],

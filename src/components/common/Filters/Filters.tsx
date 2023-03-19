@@ -1,25 +1,19 @@
 "use client";
 
 import { Settings } from "#/components/icons";
-import { Button, CheckboxsContainer, Divider, Rating, Slider, Title } from "#/components/UI";
-import { CheckboxProps } from "#/components/UI/checkbox/Checkbox.props";
+import { Button, Checkbox, CheckboxGroup, Divider, Rating, Slider, Title } from "#/components/UI";
+import { ProductsContext } from "#/context/products.context";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import _cloneDeep from "lodash.clonedeep";
-import { FC, useCallback, useState } from "react";
-import { range, rangeSecond, rangeType } from "./Filters.consts";
+import { FC, useCallback, useContext, useState } from "react";
 import styles from "./Filters.module.css";
 import { variants } from "./Filters.variants";
 
-const checkBoxProps: CheckboxProps = { rounded: true };
-
 const Filters: FC = () => {
+	const { products } = useContext(ProductsContext);
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 	const [rating, setRating] = useState(1);
-	const [rangeSelected, setRangeSelected] = useState<rangeType | null>(_cloneDeep(range));
-	const [rangeSecondSelected, setRangeSecondSelected] = useState<rangeType | null>(
-		_cloneDeep(rangeSecond)
-	);
+	const [selected, setSelected] = useState(["$10"]);
 	const [sliderState, setSliderState] = useState<number | number[]>([1.99, 4098]);
 
 	const onChangeSliderState = (value: number | number[]) => {
@@ -31,8 +25,6 @@ const Filters: FC = () => {
 	};
 
 	const onClearAllFilters = useCallback(() => {
-		setRangeSelected(_cloneDeep(range));
-		setRangeSecondSelected(_cloneDeep(rangeSecond));
 		setSliderState([...[1.99, 4098]]);
 	}, []);
 
@@ -61,11 +53,18 @@ const Filters: FC = () => {
 				<Title tag='h3' className={styles.title}>
 					Multi Range
 				</Title>
-				<CheckboxsContainer
-					className={styles.prices}
-					onChangeData={setRangeSelected}
-					data={rangeSelected}
-				/>
+				<CheckboxGroup
+					aria-label='prices'
+					value={selected}
+					onChange={setSelected}
+					className={clsx(styles.checkboxGroup, styles.prices)}
+				>
+					<Checkbox value='$10'>$10</Checkbox>
+					<Checkbox value='$10-$100'>$10-$100</Checkbox>
+					<Checkbox value='$10-$500'>$10-$500</Checkbox>
+					<Checkbox value='$500'>$500</Checkbox>
+					<Checkbox value='All'>All</Checkbox>
+				</CheckboxGroup>
 				<Divider />
 				<Slider
 					label='Slider'
@@ -78,25 +77,16 @@ const Filters: FC = () => {
 				/>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
-					Category
+					Brands
 				</Title>
-				<CheckboxsContainer
-					aria-label='prices checkboxs'
-					className={styles.prices}
-					onChangeData={setRangeSecondSelected}
-					data={rangeSecondSelected}
-					checkBoxProps={checkBoxProps}
-				/>
-				<Divider />
-				<Title tag='h3' className={styles.title}>
-					Brand
-				</Title>
-				<CheckboxsContainer
-					aria-label='brand checkboxs'
-					onChangeData={setRangeSecondSelected}
-					data={rangeSecondSelected}
-					checkBoxProps={checkBoxProps}
-				/>
+				<CheckboxGroup aria-label='brands' className={clsx(styles.checkboxGroup, styles.brands)}>
+					{products.length >= 1 &&
+						products.map(p => (
+							<Checkbox className={styles.brand} key={p.id} value={p.brand}>
+								{p.brand}
+							</Checkbox>
+						))}
+				</CheckboxGroup>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
 					Rating

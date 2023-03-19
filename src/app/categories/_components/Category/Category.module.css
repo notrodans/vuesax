@@ -1,0 +1,19 @@
+.category {
+	@apply flex flex-col rounded-tl-lg rounded-tr-lg bg-vuesax-darkBlue;
+}
+
+.image {
+	@apply rounded-tl-lg rounded-tr-lg;
+}
+
+.title {
+	@apply text-lg font-bold transition-colors hover:bg-vuesax-violet focus:bg-vuesax-violet;
+}
+
+.title:not(:last-child) {
+	@apply mb-[5px];
+}
+
+.body {
+	@apply p-3;
+}

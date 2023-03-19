@@ -1,9 +1,5 @@
 .card {
-	@apply flex flex-col rounded-lg bg-vuesax-darkBlue p-5;
-}
-
-.image {
-	@apply self-center;
+	@apply flex flex-col rounded-bl-lg rounded-br-lg bg-vuesax-darkBlue;
 }
 
 .image:not(:last-child) {
@@ -11,7 +7,7 @@
 }
 
 .body {
-	@apply flex flex-auto flex-col;
+	@apply flex flex-auto flex-col px-5;
 }
 
 .header {
@@ -41,6 +37,7 @@
 }
 
 .title {
+	@apply text-lg font-bold transition-colors hover:bg-vuesax-violet focus:bg-vuesax-violet;
 }
 
 .title:not(:last-child) {
@@ -52,7 +49,7 @@
 }
 
 .buttons {
-	@apply m-[-20px] mt-0 flex flex-col sm:flex-row;
+	@apply mx-[-20px] mt-0 flex flex-col sm:flex-row;
 }
 
 .button {

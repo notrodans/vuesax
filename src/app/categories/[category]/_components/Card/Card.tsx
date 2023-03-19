@@ -1,7 +1,7 @@
 "use client";
 
 import { Heart, ShopBag, Star } from "#/components/icons";
-import { Button, Title } from "#/components/UI";
+import { Button } from "#/components/UI";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,21 +10,29 @@ import styles from "./Card.module.css";
 import { CardProps } from "./Card.props";
 
 const Card: FC<CardProps> = props => {
-	const { image, title, text, cost, rating, className, ...cardProps } = props;
+	const {
+		title,
+		slug,
+		price,
+		rating,
+		primaryImage,
+		images,
+		description,
+		categorySlug,
+		id,
+		className
+	} = props;
 
 	return (
-		<div className={clsx(styles.card, className)} {...cardProps}>
-			<Link href='#' className={styles.image}>
+		<div className={clsx(styles.card, className)}>
+			<Link href={`/categories/${categorySlug}/${slug}`} className={styles.image}>
 				<Image
-					className={clsx(styles.image)}
-					src={image}
+					src={primaryImage}
 					width={220}
 					height={273}
-					sizes='100vw'
 					style={{
-						height: 273,
-						aspectRatio: "220 / 273",
-						objectFit: "contain"
+						width: "100%",
+						height: "auto"
 					}}
 					priority
 					alt={"card"}
@@ -35,13 +43,13 @@ const Card: FC<CardProps> = props => {
 					<Button size='small' weight='600' iconRight={<Star />} className={styles.ratingButton}>
 						<span className={styles.rating}>{rating}</span>
 					</Button>
-					<span className={styles.cost}>{cost}</span>
+					<span className={styles.cost}>${price}</span>
 				</div>
 				<div className={styles.description}>
-					<Title tag='h3' margin={false} className={styles.title}>
+					<Link className={styles.title} href={`/categories/${categorySlug}/${slug}`}>
 						{title}
-					</Title>
-					<p className={styles.text}>{text}</p>
+					</Link>
+					<p className={styles.text}>{description}</p>
 				</div>
 				<div className={styles.buttons}>
 					<Button

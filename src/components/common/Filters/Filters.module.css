@@ -7,7 +7,7 @@
 }
 
 .header:not(:last-child) {
-	@apply mb-3 2xl:mb-[26px];
+	@apply mb-3;
 }
 
 .headerTitle {
@@ -15,7 +15,7 @@
 }
 
 .openButton {
-	@apply inline-flex h-10 w-10 md:hidden;
+	@apply inline-flex h-10 w-10 md:hidden !important;
 }
 
 .body {
@@ -28,6 +28,14 @@
 
 .active:not(:last-child) {
 	@apply mb-[30px];
+}
+
+.checkboxGroup {
+	@apply flex flex-col gap-y-[15px];
+}
+
+.brand {
+	@apply capitalize;
 }
 
 .checkbox:not(:last-child) {

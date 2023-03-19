@@ -25,11 +25,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 				<link rel='shortcut icon' href={"/logo.png"} />
 			</head>
 			<body>
-				<SSRProvider>
-					<SessionProvider session={session} refetchInterval={5 * 60}>
-						{children}
-					</SessionProvider>
-				</SSRProvider>
+				<SessionProvider session={session} refetchInterval={60}>
+					<SSRProvider>{children}</SSRProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);

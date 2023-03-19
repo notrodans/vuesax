@@ -12,34 +12,19 @@ module.exports = {
 	},
 	theme: {
 		extend: {
-			screens: {
-				sm: "47.99875em",
-				md: "61.99875em",
-				lg: "80em",
-				xl: "90em",
-				"2xl": "98.1250em"
-			},
 			container: {
-				padding: "0.9375rem",
+				padding: pxToRem(15),
 				center: true,
 				screens: {
-					sm: "61.99875em",
-					md: "64em",
-					lg: "80em",
-					xl: "90em",
-					"2xl": "98.1250em"
+					sm: pxToRem(767.98),
+					md: pxToRem(991.98),
+					lg: pxToRem(1280),
+					xl: pxToRem(1440),
+					"2xl": pxToRem(1570)
 				}
 			},
 			fontFamily: {
 				sans: ["var(--primary-font)"]
-			},
-			container: {
-				padding: "0.9375rem",
-				center: true,
-				screens: {
-					none: "auto",
-					"2xl": "98.1250em"
-				}
 			},
 			colors: {
 				vuesax: {

@@ -1,6 +1,6 @@
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
 export { default as Button } from "./button/Button";
-export { default as CheckboxsContainer } from "./checkbox-container/CheckboxsContainer";
+export { default as CheckboxGroup } from "./checkbox-container/CheckboxsContainer";
 export { default as Checkbox } from "./checkbox/Checkbox";
 export { default as Divider } from "./divider/Divider";
 export { default as Logo } from "./logo/Logo";

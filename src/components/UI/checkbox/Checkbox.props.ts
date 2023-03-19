@@ -1,8 +1,8 @@
 import { HTMLAttributes, PropsWithChildren } from "react";
-import { AriaCheckboxProps } from "react-aria";
+import { AriaCheckboxGroupItemProps } from "react-aria";
 
 export interface CheckboxProps
-	extends AriaCheckboxProps,
+	extends AriaCheckboxGroupItemProps,
 		PropsWithChildren,
 		Omit<
 			HTMLAttributes<HTMLLabelElement>,

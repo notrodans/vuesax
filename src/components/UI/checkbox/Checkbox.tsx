@@ -1,21 +1,21 @@
 "use client";
 
 import clsx from "clsx";
-import { FC, memo, useRef } from "react";
-import { mergeProps, useCheckbox, useFocusRing, VisuallyHidden } from "react-aria";
-import { useToggleState } from "react-stately";
+import { FC, memo, useContext, useRef } from "react";
+import { mergeProps, useCheckboxGroupItem, useFocusRing, VisuallyHidden } from "react-aria";
+import { CheckboxGroupContext } from "../checkbox-container/CheckboxsContainer";
 import styles from "./Checkbox.module.css";
 import { CheckboxProps } from "./Checkbox.props";
 
 const Checkbox: FC<CheckboxProps> = props => {
 	const { rounded = true, className, children, ...checkBoxProps } = props;
-	const state = useToggleState(props);
+	const state = useContext(CheckboxGroupContext)!;
 	const ref = useRef(null);
-	const { inputProps } = useCheckbox(checkBoxProps, state, ref);
+	const { inputProps } = useCheckboxGroupItem(props, state, ref);
 	const { focusProps, isFocusVisible } = useFocusRing();
 
 	const checkBoxClassname = clsx(styles.box, {
-		[styles.active]: state.isSelected,
+		[styles.active]: state.isSelected(props.value),
 		[styles.focus]: isFocusVisible,
 		[styles.rounded]: rounded
 	});

@@ -1,83 +1,36 @@
 "use client";
 
-import { rangeKeys, rangeType } from "#/components/common/Filters/Filters.consts";
-import { Checkbox } from "#/components/UI";
-import clsx from "clsx";
-import { FC, memo, useMemo } from "react";
-import styles from "./CheckboxsContainer.module.css";
+import { createContext, FC } from "react";
+import { useCheckboxGroup } from "react-aria";
+import { CheckboxGroupState, useCheckboxGroupState } from "react-stately";
 import { CheckboxsContainerProps } from "./CheckboxsContainer.props";
 
-const CheckboxsContainer: FC<CheckboxsContainerProps> = props => {
-	const {
-		children,
-		className,
-		data: rangeSelected,
-		onChangeData,
-		checkBoxProps,
-		...checkboxsContainerProps
-	} = props;
-	const rangeSelectedEntries = useMemo(
-		() =>
-			rangeSelected &&
-			(Object.entries(rangeSelected) as [
-				key: rangeKeys<typeof rangeSelected>,
-				value: rangeType[rangeKeys<typeof rangeSelected>]
-			][]),
-		[rangeSelected]
+export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(null);
+
+const CheckboxGroup: FC<CheckboxsContainerProps> = props => {
+	const { children, className, label, description, errorMessage, validationState } = props;
+	const state = useCheckboxGroupState(props);
+	const { groupProps, labelProps, descriptionProps, errorMessageProps } = useCheckboxGroup(
+		props,
+		state
 	);
 
-	const onChangeCheckbox = (key: any) => {
-		if (!rangeSelected || !onChangeData) {
-			return;
-		}
-		if (rangeSelected[key].isSelected) {
-			onChangeData(prev => {
-				const obj = prev?.[key];
-				if (obj) {
-					obj.isSelected = false;
-					const newPrev = { ...prev };
-					return newPrev;
-				}
-				return null;
-			});
-		} else {
-			onChangeData(prev => {
-				const obj = prev?.[key];
-				if (obj) {
-					obj.isSelected = true;
-					const newPrev = { ...prev };
-					return newPrev;
-				}
-				return null;
-			});
-		}
-	};
-
-	if (rangeSelected) {
-		return (
-			<div className={clsx(styles.checkboxsContainer, className)} {...checkboxsContainerProps}>
-				{rangeSelectedEntries &&
-					rangeSelectedEntries.map(([key, value]) => (
-						<Checkbox
-							aria-label='checkbox'
-							className={styles.checkbox}
-							key={key}
-							isSelected={value.isSelected}
-							onChange={() => onChangeCheckbox(key)}
-							{...checkBoxProps}
-						>
-							{value.children}
-						</Checkbox>
-					))}
-			</div>
-		);
-	}
-
 	return (
-		<div className={clsx(styles.checkboxsContainer, className)} {...checkboxsContainerProps}>
-			{children}
+		<div className={className} {...groupProps}>
+			{label && <span {...labelProps}>{label}</span>}
+			<CheckboxGroupContext.Provider value={state}>{children}</CheckboxGroupContext.Provider>
+			{description && (
+				<div {...descriptionProps} style={{ fontSize: 12 }}>
+					{description}
+				</div>
+			)}
+			{errorMessage && validationState === "invalid" && (
+				<div {...errorMessageProps} style={{ color: "red", fontSize: 12 }}>
+					{errorMessage}
+				</div>
+			)}
 		</div>
 	);
 };
 
-export default memo(CheckboxsContainer);
+export default CheckboxGroup;

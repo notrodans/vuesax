@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, PropsWithChildren } from "react";
-import styles from "./authwrapper.module.css";
+import styles from "./AuthWrapper.module.css";
 
 export const AuthWrapper: FC<PropsWithChildren> = ({ children }) => {
 	return (

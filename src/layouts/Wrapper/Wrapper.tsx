@@ -3,7 +3,7 @@
 import { Footer, Header } from "#/components/common";
 import { Breadcrumbs } from "#/components/UI";
 import { FC, PropsWithChildren } from "react";
-import styles from "../app/styles.module.css";
+import styles from "./Wrapper.module.css";
 
 export const Wrapper: FC<PropsWithChildren> = ({ children }) => {
 	return (

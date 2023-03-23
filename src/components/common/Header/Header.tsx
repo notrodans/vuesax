@@ -49,7 +49,10 @@ const Header: FC<HeaderProps> = () => {
 								<User firstName={data?.firstName} lastName={data?.lastName} avatar={data?.image} />
 							</>
 						) : (
-							<Link href={"/signin"}>Log in</Link>
+							<div className={styles.links}>
+								<Link href={"/signin"}>Log In</Link>
+								<Link href={"/signup"}>Sign Up</Link>
+							</div>
 						)}
 					</div>
 				</div>

@@ -21,3 +21,7 @@
 .right.loading {
 	@apply self-stretch;
 }
+
+.links {
+	@apply flex items-center gap-x-2;
+}

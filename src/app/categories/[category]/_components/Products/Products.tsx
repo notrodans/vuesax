@@ -12,7 +12,7 @@ import styles from "./Products.module.css";
 
 export const Products: FC = () => {
 	const { products } = useContext(ProductsContext);
-	const productsLength = products.length;
+	const productsLength = products?.length || 0;
 	const [isLoading, setIsLoading] = useState(true);
 	const [isGrid, setIsGrid] = useState(false);
 
@@ -57,7 +57,7 @@ export const Products: FC = () => {
 					[styles.grid]: isGrid
 				})}
 			>
-				{products.length >= 1 && products.map(p => <Card key={p.id} {...p} />)}
+				{products && products?.length >= 1 && products.map(p => <Card key={p.id} {...p} />)}
 			</motion.div>
 		</div>
 	);

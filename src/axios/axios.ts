@@ -1,21 +1,17 @@
 import axios from "axios";
 
-const getInstance = async ({
-	accessToken,
-	refreshToken
-}: {
-	accessToken?: string;
-	refreshToken?: string;
-}) => {
+const getInstance = async (params?: { accessToken: string; refreshToken: string }) => {
 	const $axios = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_URL, withCredentials: true });
 
 	$axios.interceptors.request.use(config => {
-		if (!config.headers["Authorization"]) {
-			config.headers["Authorization"] = `Bearer ${accessToken}`;
+		if (params?.accessToken && params?.refreshToken) {
+			if (!config.headers["Authorization"]) {
+				config.headers["Authorization"] = `Bearer ${params.accessToken}`;
+			}
+			config.data = {
+				refreshToken: params.refreshToken
+			};
 		}
-		config.data = {
-			refreshToken: refreshToken
-		};
 		return config;
 	});
 

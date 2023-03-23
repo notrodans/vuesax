@@ -15,7 +15,7 @@
 }
 
 .openButton {
-	@apply inline-flex h-10 w-10 md:hidden !important;
+	@apply inline-flex h-10 w-10 lg:hidden !important;
 }
 
 .body {

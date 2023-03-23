@@ -1,0 +1,35 @@
+.container {
+	@apply flex w-full flex-col;
+}
+
+.container:not(:last-child) {
+	@apply mb-3;
+}
+
+.label {
+	@apply mb-1;
+}
+
+.input {
+	@apply rounded-md bg-vuesax-darkBlue bg-none py-3 text-sm font-semibold text-vuesax-white;
+}
+
+.description {
+	@apply mt-1 text-sm text-green-700;
+}
+
+.error {
+	@apply mt-1 text-sm text-red-700;
+}
+
+.sm {
+	@apply max-w-sm;
+}
+
+.md {
+	@apply max-w-md;
+}
+
+.lg {
+	@apply max-w-lg;
+}

@@ -13,7 +13,8 @@ const Filters: FC = () => {
 	const { products } = useContext(ProductsContext);
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 	const [rating, setRating] = useState(1);
-	const [selected, setSelected] = useState(["$10"]);
+	const [selectedPrices, setSelectedPrices] = useState<string[]>(["$10"]);
+	const [selectedBrands, setSelectedBrands] = useState<string[]>();
 	const [sliderState, setSliderState] = useState<number | number[]>([1.99, 4098]);
 
 	const onChangeSliderState = (value: number | number[]) => {
@@ -55,8 +56,8 @@ const Filters: FC = () => {
 				</Title>
 				<CheckboxGroup
 					aria-label='prices'
-					value={selected}
-					onChange={setSelected}
+					value={selectedPrices}
+					onChange={setSelectedPrices}
 					className={clsx(styles.checkboxGroup, styles.prices)}
 				>
 					<Checkbox value='$10'>$10</Checkbox>
@@ -79,9 +80,15 @@ const Filters: FC = () => {
 				<Title tag='h3' className={styles.title}>
 					Brands
 				</Title>
-				<CheckboxGroup aria-label='brands' className={clsx(styles.checkboxGroup, styles.brands)}>
-					{products.length >= 1 &&
-						products.map(p => (
+				<CheckboxGroup
+					aria-label='brands'
+					defaultValue={selectedBrands}
+					onChange={setSelectedBrands}
+					className={clsx(styles.checkboxGroup, styles.brands)}
+				>
+					{products &&
+						products?.length >= 1 &&
+						products?.map(p => (
 							<Checkbox className={styles.brand} key={p.id} value={p.brand}>
 								{p.brand}
 							</Checkbox>

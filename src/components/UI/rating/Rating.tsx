@@ -1,14 +1,14 @@
 "use client";
 
 import clsx from "clsx";
-import { forwardRef, Fragment, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { forwardRef, Fragment, KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./Rating.module.css";
 import { RatingProps } from "./Rating.props";
 import { Star } from "./Star";
 
 const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 	const { rating, setRating, isEditable = false, className, tabIndex, ...ratingProps } = props;
-	const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
+	const [ratingArray, setRatingArray] = useState<ReactNode[]>(new Array(5).fill(<></>));
 	const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 
 	function computeFocus(r: number, i: number): number {
@@ -25,7 +25,7 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 	}
 
 	function constructingRating(currentRating: number) {
-		const updatedArray = ratingArray.map((r, i: number) => (
+		const updatedArray = ratingArray.map((_r, i: number) => (
 			<button
 				type='button'
 				className={clsx(styles.star, {
@@ -40,7 +40,7 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 				onMouseLeave={() => changeDisplay(rating)}
 				ref={r => ratingArrayRef.current?.push(r)}
 				role={isEditable ? "slider" : ""}
-				aria-label={isEditable ? "Укажите рейтинг" : "Рейтинг " + rating}
+				aria-label={isEditable ? "Set rating please" : "Rating " + rating}
 				aria-valuemax={5}
 				aria-valuemin={1}
 				aria-valuenow={rating}

@@ -10,7 +10,7 @@
 	@apply stroke-vuesax-orange;
 }
 
-span:not(:last-child) > .star {
+.star:not(:last-child) {
 	@apply pr-[5px];
 }
 

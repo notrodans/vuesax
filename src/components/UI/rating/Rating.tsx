@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { forwardRef, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { forwardRef, Fragment, KeyboardEvent, useEffect, useRef, useState } from "react";
 import styles from "./Rating.module.css";
 import { RatingProps } from "./Rating.props";
 import { Star } from "./Star";
@@ -26,7 +26,8 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 
 	function constructingRating(currentRating: number) {
 		const updatedArray = ratingArray.map((r, i: number) => (
-			<span
+			<button
+				type='button'
 				className={clsx(styles.star, {
 					[styles.filled]: i < currentRating,
 					[styles.editable]: isEditable
@@ -45,7 +46,7 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 				aria-valuenow={rating}
 			>
 				<Star />
-			</span>
+			</button>
 		));
 		setRatingArray(updatedArray);
 	}
@@ -87,7 +88,7 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 	return (
 		<div ref={ref} className={clsx(styles.rating, className)} {...ratingProps}>
 			{ratingArray.map((r, i) => (
-				<span key={i}>{r}</span>
+				<Fragment key={i}>{r}</Fragment>
 			))}
 		</div>
 	);

@@ -1,7 +1,8 @@
 "use client";
 
 import { useSliderState } from "react-stately";
-
+import clsx from "clsx";
+import { FC, useRef } from "react";
 import {
 	mergeProps,
 	useFocusRing,
@@ -11,9 +12,7 @@ import {
 	VisuallyHidden
 } from "react-aria";
 import styles from "./Slider.module.css";
-import { FC, memo, useRef } from "react";
 import { SliderProps, ThumbProps } from "./Slider.props";
-import clsx from "clsx";
 
 const Slider: FC<SliderProps> = props => {
 	const { multi = false, ...sliderProps } = props;

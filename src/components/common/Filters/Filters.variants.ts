@@ -4,17 +4,11 @@ export const variants: Variants = {
 	visible: {
 		opacity: 1,
 		height: "100%",
-		visibility: "visible",
-		transition: {
-			stiffness: 2500
-		}
+		visibility: "visible"
 	},
 	hidden: {
+		height: "0",
 		opacity: 0,
-		height: "0px",
-		visibility: "hidden",
-		transition: {
-			stiffness: 1500
-		}
+		visibility: "hidden"
 	}
 };

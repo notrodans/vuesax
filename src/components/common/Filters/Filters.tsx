@@ -5,17 +5,27 @@ import { Button, Checkbox, CheckboxGroup, Divider, Rating, Slider, Title } from 
 import { ProductsContext } from "#/context/products.context";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { FC, useCallback, useContext, useState } from "react";
+import { FC, useContext, useMemo, useState } from "react";
 import styles from "./Filters.module.css";
 import { variants } from "./Filters.variants";
 
 const Filters: FC = () => {
 	const { products } = useContext(ProductsContext);
+	const productsPriceMin = useMemo(
+		() => (products && products.length ? Math.min(...products.map(i => i.price)) : 0),
+		[products]
+	);
+	const productsPriceMax = useMemo(
+		() => (products && products.length ? Math.max(...products.map(i => i.price)) : 0),
+		[products]
+	);
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 	const [rating, setRating] = useState(1);
-	const [selectedPrices, setSelectedPrices] = useState<string[]>(["$10"]);
-	const [selectedBrands, setSelectedBrands] = useState<string[]>();
-	const [sliderState, setSliderState] = useState<number | number[]>([1.99, 4098]);
+	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+	const [sliderState, setSliderState] = useState<number | number[]>([
+		productsPriceMin,
+		productsPriceMax
+	]);
 
 	const onChangeSliderState = (value: number | number[]) => {
 		setSliderState(value);
@@ -25,9 +35,11 @@ const Filters: FC = () => {
 		setIsOpen(prev => !prev);
 	};
 
-	const onClearAllFilters = useCallback(() => {
-		setSliderState([...[1.99, 4098]]);
-	}, []);
+	const onClearAllFilters = () => {
+		setRating(1);
+		setSelectedBrands([]);
+		setSliderState([productsPriceMin, productsPriceMax]);
+	};
 
 	return (
 		<div className={styles.filters}>
@@ -51,30 +63,17 @@ const Filters: FC = () => {
 					[styles.active]: isOpen
 				})}
 			>
-				<Title tag='h3' className={styles.title}>
-					Multi Range
-				</Title>
-				<CheckboxGroup
-					aria-label='prices'
-					value={selectedPrices}
-					onChange={setSelectedPrices}
-					className={clsx(styles.checkboxGroup, styles.prices)}
-				>
-					<Checkbox value='$10'>$10</Checkbox>
-					<Checkbox value='$10-$100'>$10-$100</Checkbox>
-					<Checkbox value='$10-$500'>$10-$500</Checkbox>
-					<Checkbox value='$500'>$500</Checkbox>
-					<Checkbox value='All'>All</Checkbox>
-				</CheckboxGroup>
-				<Divider />
 				<Slider
-					label='Slider'
-					multi
+					label='Currency'
+					formatOptions={{ style: "currency", currency: "USD" }}
+					multi={products ? products?.length >= 2 : false}
+					isDisabled={products ? products?.length < 2 : true}
+					step={10}
 					value={sliderState}
 					defaultValue={sliderState}
+					minValue={productsPriceMin}
+					maxValue={productsPriceMax}
 					onChange={onChangeSliderState}
-					step={10}
-					maxValue={4098}
 				/>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
@@ -82,6 +81,7 @@ const Filters: FC = () => {
 				</Title>
 				<CheckboxGroup
 					aria-label='brands'
+					value={selectedBrands}
 					defaultValue={selectedBrands}
 					onChange={setSelectedBrands}
 					className={clsx(styles.checkboxGroup, styles.brands)}

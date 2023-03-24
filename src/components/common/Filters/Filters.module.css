@@ -19,7 +19,7 @@
 }
 
 .body {
-	@apply h-full rounded-lg bg-vuesax-darkBlue max-md:h-0;
+	@apply rounded-lg bg-vuesax-darkBlue max-md:h-0;
 }
 
 .active {

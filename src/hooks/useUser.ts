@@ -1,4 +1,4 @@
-import { getInstance } from "#/axios";
+import { getAuthInstance } from "#/axios";
 import { useSession } from "next-auth/react";
 import useSWR, { SWRConfiguration } from "swr";
 
@@ -10,10 +10,7 @@ export const useUser = (params?: SWRConfiguration) => {
 		return { data: null, error: null, isLoading: false };
 	}
 	const fetcher = async (url: string) => {
-		const $axios = await getInstance({
-			refreshToken: session?.data?.user.refreshToken,
-			accessToken: session?.data?.user.accessToken
-		});
+		const $axios = await getAuthInstance();
 		const { data } = await $axios.post(url);
 		return data;
 	};

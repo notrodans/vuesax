@@ -10,18 +10,7 @@ import styles from "./Card.module.css";
 import { CardProps } from "./Card.props";
 
 const Card: FC<CardProps> = props => {
-	const {
-		title,
-		slug,
-		price,
-		rating,
-		primaryImage,
-		images,
-		description,
-		categorySlug,
-		id,
-		className
-	} = props;
+	const { title, slug, price, rating, primaryImage, description, categorySlug, className } = props;
 
 	return (
 		<div className={clsx(styles.card, className)}>
@@ -43,7 +32,9 @@ const Card: FC<CardProps> = props => {
 					<Button size='small' weight='600' iconRight={<Star />} className={styles.ratingButton}>
 						<span className={styles.rating}>{rating}</span>
 					</Button>
-					<span className={styles.cost}>${price}</span>
+					<span className={styles.cost}>
+						{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price)}
+					</span>
 				</div>
 				<div className={styles.description}>
 					<Link className={styles.title} href={`/categories/${categorySlug}/${slug}`}>

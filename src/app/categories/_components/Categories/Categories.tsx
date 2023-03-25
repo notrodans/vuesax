@@ -9,8 +9,8 @@ import Category from "../Category/Category";
 import styles from "./Categories.module.css";
 
 export const Categories: FC = () => {
-	const { categories, setCategory } = useContext(CategoriesContext);
-	const categoriesLength = categories.length;
+	const { categories } = useContext(CategoriesContext);
+	const categoriesLength = categories?.length ?? 0;
 
 	return (
 		<div className={styles.categories}>
@@ -24,10 +24,9 @@ export const Categories: FC = () => {
 				<SearchField placeholder='Search here' aria-label='find orders' />
 			</div>
 			<motion.div className={styles.body}>
-				{categories.length >= 1 &&
-					categories.map((p, i) => (
-						<Category onClick={() => setCategory?.(p.slug)} key={i} {...p} />
-					))}
+				{categories?.map?.((p, i) => (
+					<Category key={i} {...p} />
+				))}
 			</motion.div>
 		</div>
 	);

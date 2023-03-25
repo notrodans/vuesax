@@ -5,7 +5,7 @@ import { useCheckboxGroup } from "react-aria";
 import { CheckboxGroupState, useCheckboxGroupState } from "react-stately";
 import { CheckboxsContainerProps } from "./CheckboxsContainer.props";
 
-export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(null);
+export const CheckboxGroupContext = createContext<CheckboxGroupState>({} as CheckboxGroupState);
 
 const CheckboxGroup: FC<CheckboxsContainerProps> = props => {
 	const { children, className, label, description, errorMessage, validationState } = props;

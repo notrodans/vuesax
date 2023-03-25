@@ -1,45 +1,83 @@
 "use client";
 
+import { $axios } from "#/axios";
 import { Settings } from "#/components/icons";
 import { Button, Checkbox, CheckboxGroup, Divider, Rating, Slider, Title } from "#/components/UI";
 import { ProductsContext } from "#/context/products.context";
+import { IProduct } from "#/interfaces/Product.interface";
+import { useFilters } from "#/store";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { FC, useContext, useMemo, useState } from "react";
+import { FC, memo, useCallback, useContext, useRef, useState } from "react";
 import styles from "./Filters.module.css";
 import { variants } from "./Filters.variants";
 
 const Filters: FC = () => {
-	const { products } = useContext(ProductsContext);
-	const productsPriceMin = useMemo(
-		() => (products && products.length ? Math.min(...products.map(i => i.price)) : 0),
-		[products]
-	);
-	const productsPriceMax = useMemo(
-		() => (products && products.length ? Math.max(...products.map(i => i.price)) : 0),
-		[products]
-	);
+	const { searchValue, setSearchValue } = useFilters();
+	const { products, setProducts, category } = useContext(ProductsContext);
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 	const [rating, setRating] = useState(1);
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-	const [sliderState, setSliderState] = useState<number | number[]>([
-		productsPriceMin,
-		productsPriceMax
+
+	const priceMin = useRef(
+		products && products.length >= 1 ? Math.min(...products.map(i => i.price)) : 0
+	);
+	const priceMax = useRef(
+		products && products.length >= 1 ? Math.max(...products.map(i => i.price)) : 0
+	);
+
+	const [priceState, setPriceState] = useState<number[] | number>([
+		priceMin.current,
+		priceMax.current
 	]);
 
-	const onChangeSliderState = (value: number | number[]) => {
-		setSliderState(value);
-	};
-
-	const onHandleOpen = () => {
+	const onHandleOpen = useCallback(() => {
 		setIsOpen(prev => !prev);
-	};
+	}, []);
 
-	const onClearAllFilters = () => {
+	const onClearAllFilters = useCallback(async () => {
 		setRating(1);
 		setSelectedBrands([]);
-		setSliderState([productsPriceMin, productsPriceMax]);
-	};
+		setPriceState([priceMin.current, priceMax.current]);
+		setSearchValue("");
+
+		try {
+			const { data } = await $axios.get<IProduct[]>("products/bySlug/" + category);
+			setProducts?.(data ?? []);
+		} catch {
+			setProducts?.([]);
+		}
+	}, [category, setProducts, priceMin, priceMax]);
+
+	const onClick = useCallback(async () => {
+		const params: { search?: string; brands?: string; rating?: number; price?: string } = {};
+
+		if (searchValue) {
+			params.search = searchValue;
+		}
+
+		if (selectedBrands.length >= 1) {
+			params.brands = `${selectedBrands.join(",")}`;
+		}
+
+		if (rating) {
+			params.rating = rating;
+		}
+
+		if (Array.isArray(priceState)) {
+			if (priceState.length === 2 && priceState[0] > 1 && priceState[1] > 0) {
+				params.price = `${(priceState as number[])[0]},${(priceState as number[])[1]}`;
+			}
+		}
+		try {
+			const { data } = await $axios.get<IProduct[]>("products/bySlug/" + category, {
+				params
+			});
+			setProducts?.(data ?? []);
+		} catch {
+			setProducts?.([]);
+		}
+	}, [category, priceState, rating, selectedBrands, searchValue]);
 
 	return (
 		<div className={styles.filters}>
@@ -69,11 +107,11 @@ const Filters: FC = () => {
 					multi={products ? products?.length >= 2 : false}
 					isDisabled={products ? products?.length < 2 : true}
 					step={10}
-					value={sliderState}
-					defaultValue={sliderState}
-					minValue={productsPriceMin}
-					maxValue={productsPriceMax}
-					onChange={onChangeSliderState}
+					value={Array.isArray(priceState) && priceState?.length >= 2 ? priceState : 0}
+					defaultValue={priceState}
+					minValue={priceMin.current}
+					maxValue={priceMax.current}
+					onChange={setPriceState}
 				/>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
@@ -86,19 +124,21 @@ const Filters: FC = () => {
 					onChange={setSelectedBrands}
 					className={clsx(styles.checkboxGroup, styles.brands)}
 				>
-					{products &&
-						products?.length >= 1 &&
-						products?.map(p => (
-							<Checkbox className={styles.brand} key={p.id} value={p.brand}>
-								{p.brand}
-							</Checkbox>
-						))}
+					{products?.map?.(p => (
+						<Checkbox aria-label={p.title} className={styles.brand} key={p.id} value={p.brandSlug}>
+							{p.brand}
+						</Checkbox>
+					))}
 				</CheckboxGroup>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
 					Rating
 				</Title>
 				<Rating isEditable setRating={setRating} rating={rating} />
+				<Divider />
+				<Button rounded onClick={onClick}>
+					Apply filters
+				</Button>
 			</motion.div>
 			<Button onClick={onClearAllFilters} rounded textTransform='upper'>
 				clear all filters
@@ -107,4 +147,4 @@ const Filters: FC = () => {
 	);
 };
 
-export default Filters;
+export default memo(Filters);

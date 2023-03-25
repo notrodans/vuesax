@@ -9,9 +9,9 @@ import { CheckboxProps } from "./Checkbox.props";
 
 const Checkbox: FC<CheckboxProps> = props => {
 	const { rounded = true, className, children, ...checkBoxProps } = props;
-	const state = useContext(CheckboxGroupContext)!;
+	const state = useContext(CheckboxGroupContext);
 	const ref = useRef(null);
-	const { inputProps } = useCheckboxGroupItem(props, state, ref);
+	const { inputProps } = useCheckboxGroupItem(checkBoxProps, state, ref);
 	const { focusProps, isFocusVisible } = useFocusRing();
 
 	const checkBoxClassname = clsx(styles.box, {

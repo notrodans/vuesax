@@ -6,26 +6,20 @@ export const metadata = {
 };
 
 const fetchCategories = async () => {
-	const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/categories/", {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json"
-		}
-	});
-	const categories = (await response.json()) as ICategory[];
-
-	if (!categories) {
-		return [];
+	try {
+		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/categories/", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		return (await response.json()) as ICategory[];
+	} catch {
+		return null;
 	}
-
-	return categories;
 };
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const categories = await fetchCategories();
-	return (
-		<CategoriesProvider categories={categories} category={""}>
-			{children}
-		</CategoriesProvider>
-	);
+	return <CategoriesProvider categories={categories}>{children}</CategoriesProvider>;
 }

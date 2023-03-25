@@ -12,7 +12,6 @@
 		"format": "npx prettier --write src/**/*.ts src/**/*.tsx"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.7.13",
 		"@react-aria/ssr": "^3.5.0",
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/line-clamp": "0.4.2",
@@ -22,20 +21,19 @@
 		"jsonwebtoken": "^9.0.0",
 		"next": "^13.2.3",
 		"next-auth": "^4.20.1",
-		"npm": "^9.6.0",
 		"react": "18.2.0",
 		"react-aria": "^3.23.1",
 		"react-dom": "18.2.0",
 		"react-hook-form": "^7.43.7",
 		"react-stately": "^3.21.0",
 		"sharp": "^0.31.3",
-		"swr": "^2.1.1"
+		"swr": "^2.1.1",
+		"zustand": "^4.3.6"
 	},
 	"devDependencies": {
 		"@react-types/shared": "^3.17.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/jsonwebtoken": "^9.0.1",
-		"@types/lodash.clonedeep": "^4.5.7",
 		"@types/node": "^18.15.3",
 		"@types/react": "18.0.28",
 		"@types/react-dom": "18.0.11",

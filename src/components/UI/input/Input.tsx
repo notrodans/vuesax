@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef } from "react";
 import { useTextField } from "react-aria";
 import styles from "./Input.module.css";
@@ -16,7 +17,13 @@ const Input = forwardRef((props: IInputProps, ref: any) => {
 			<label className={styles.label} {...labelProps}>
 				{label}
 			</label>
-			<input className={styles.input} {...inputProps} ref={ref} />
+			<input
+				className={clsx(styles.input, {
+					[styles.rounded]: rounded
+				})}
+				{...inputProps}
+				ref={ref}
+			/>
 			{props.description && (
 				<div className={styles.description} {...descriptionProps}>
 					{props.description}

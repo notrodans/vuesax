@@ -5,7 +5,7 @@ import { Button } from "#/components/UI";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import styles from "./Card.module.css";
 import { CardProps } from "./Card.props";
 
@@ -66,4 +66,4 @@ const Card: FC<CardProps> = props => {
 	);
 };
 
-export default Card;
+export default memo(Card);

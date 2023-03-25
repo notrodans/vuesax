@@ -1,0 +1,27 @@
+.header {
+	@apply flex flex-col justify-between gap-x-3;
+}
+
+.header:not(:last-child) {
+	@apply mb-3;
+}
+
+.top {
+	@apply flex items-center justify-between;
+}
+
+.title {
+	@apply mb-3 !important;
+}
+
+.search:not(:last-child) {
+	@apply mb-[30px];
+}
+
+.active {
+	@apply 2xl:inline-flex;
+}
+
+.gridButton {
+	@apply hidden stroke-vuesax-black !important;
+}

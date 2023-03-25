@@ -8,6 +8,7 @@ import styles from "./Category.module.css";
 import { CardProps } from "./Category.props";
 
 const Category: FC<CardProps> = props => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { name, slug, id, image, createdAt, updatedAt, ref, children, ...linkProps } = props;
 
 	return (

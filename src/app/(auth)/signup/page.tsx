@@ -1,6 +1,6 @@
 "use client";
 
-import { getInstance } from "#/axios";
+import { getAuthInstance } from "#/axios";
 import { Pattern } from "#/components/icons";
 import { Button, Input } from "#/components/UI";
 import { useUser } from "#/hooks/useUser";
@@ -31,14 +31,14 @@ export default function Page() {
 	const onSubmit: SubmitHandler<FormInputs> = async data => {
 		const fetchRegister = async () => {
 			try {
-				const $axios = await getInstance();
+				const $axios = await getAuthInstance();
 				await $axios.post("auth/register", { ...data });
 				router.push("/signin");
-			} catch (err: any) {
+			} catch (err) {
 				if (axios.isAxiosError(err)) {
 					return setError(err.message);
 				}
-				console.log(err.message);
+				console.log(err);
 			}
 		};
 

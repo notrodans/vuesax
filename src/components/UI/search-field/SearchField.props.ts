@@ -14,4 +14,6 @@ type InputAttributes = Omit<
 	| "value"
 >;
 
-export interface SearchFieldProps extends AriaSearchFieldProps, InputAttributes {}
+export interface SearchFieldProps extends AriaSearchFieldProps, InputAttributes {
+	onClickButton?: () => void;
+}

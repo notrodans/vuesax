@@ -5,6 +5,7 @@ export interface IProduct {
 	description: string;
 	rating: number;
 	brand: string;
+	brandSlug: string;
 	price: number;
 	primaryImage: string;
 	categorySlug: string;

@@ -1,6 +1,5 @@
 "use client";
 
-import { useSliderState } from "react-stately";
 import clsx from "clsx";
 import { FC, useRef } from "react";
 import {
@@ -11,6 +10,7 @@ import {
 	useSliderThumb,
 	VisuallyHidden
 } from "react-aria";
+import { useSliderState } from "react-stately";
 import styles from "./Slider.module.css";
 import { SliderProps, ThumbProps } from "./Slider.props";
 

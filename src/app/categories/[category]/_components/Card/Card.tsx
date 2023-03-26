@@ -20,8 +20,12 @@ const Card: FC<CardProps> = props => {
 					width={220}
 					height={273}
 					style={{
+						position: "absolute",
 						width: "100%",
-						height: "auto"
+						height: "100%",
+						left: 0,
+						top: 0,
+						objectFit: "contain"
 					}}
 					priority
 					alt={"card"}

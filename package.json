@@ -25,6 +25,7 @@
 		"react-aria": "^3.23.1",
 		"react-dom": "18.2.0",
 		"react-hook-form": "^7.43.7",
+		"react-paginate": "^8.1.4",
 		"react-stately": "^3.21.0",
 		"sharp": "^0.31.3",
 		"swr": "^2.1.1",

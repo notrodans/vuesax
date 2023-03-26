@@ -1,7 +1,16 @@
 "use client";
 
 import clsx from "clsx";
-import { forwardRef, Fragment, KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react";
+import {
+	forwardRef,
+	Fragment,
+	KeyboardEvent,
+	memo,
+	ReactNode,
+	useEffect,
+	useRef,
+	useState
+} from "react";
 import styles from "./Rating.module.css";
 import { RatingProps } from "./Rating.props";
 import { Star } from "./Star";
@@ -96,4 +105,4 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>((props, ref) => {
 
 Rating.displayName = "rating";
 
-export default Rating;
+export default memo(Rating);

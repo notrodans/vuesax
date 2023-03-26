@@ -1,6 +1,6 @@
 "use client";
 
-import { Footer, Header } from "#/components/common";
+import { Header } from "#/components/common";
 import { Breadcrumbs } from "#/components/UI";
 import { FC, PropsWithChildren } from "react";
 import styles from "./Wrapper.module.css";
@@ -11,7 +11,6 @@ export const Wrapper: FC<PropsWithChildren> = ({ children }) => {
 			<Header />
 			<Breadcrumbs />
 			<main className={styles.page}>{children}</main>
-			<Footer />
 		</div>
 	);
 };

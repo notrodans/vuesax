@@ -6,14 +6,6 @@
 	@apply flex content-baseline items-center gap-x-[10px] overflow-x-auto;
 }
 
-.category {
-	@apply text-2xl font-semibold capitalize;
-}
-
-.vDivider {
-	@apply w-[1px] self-stretch bg-[#979797];
-}
-
 .goBack {
 	@apply flex items-center gap-x-[10px];
 }

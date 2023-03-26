@@ -3,7 +3,7 @@ import { Variants } from "framer-motion";
 export const variants: Variants = {
 	visible: {
 		opacity: 1,
-		height: "100%",
+		height: "auto",
 		visibility: "visible"
 	},
 	hidden: {

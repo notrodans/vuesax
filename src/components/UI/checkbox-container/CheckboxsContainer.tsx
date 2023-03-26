@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, FC } from "react";
+import { createContext, FC, memo } from "react";
 import { useCheckboxGroup } from "react-aria";
 import { CheckboxGroupState, useCheckboxGroupState } from "react-stately";
 import { CheckboxsContainerProps } from "./CheckboxsContainer.props";
@@ -33,4 +33,4 @@ const CheckboxGroup: FC<CheckboxsContainerProps> = props => {
 	);
 };
 
-export default CheckboxGroup;
+export default memo(CheckboxGroup);

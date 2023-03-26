@@ -13,7 +13,7 @@ module.exports = {
 	theme: {
 		extend: {
 			screens: {
-				sm: pxToRem(767.98),
+				sm: pxToRem(494.98),
 				md: pxToRem(991.98),
 				lg: pxToRem(1280),
 				xl: pxToRem(1440),

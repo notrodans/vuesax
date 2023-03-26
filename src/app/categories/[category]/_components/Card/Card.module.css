@@ -1,5 +1,9 @@
 .card {
-	@apply flex flex-col rounded-bl-lg rounded-br-lg bg-vuesax-darkBlue;
+	@apply flex flex-col rounded-bl-lg rounded-br-lg bg-vuesax-darkBlue pt-3 md:pt-5;
+}
+
+.image {
+	@apply relative pb-[80%] md:pb-[60%];
 }
 
 .image:not(:last-child) {
@@ -37,7 +41,7 @@
 }
 
 .title {
-	@apply text-lg font-bold transition-colors hover:bg-vuesax-violet focus:bg-vuesax-violet;
+	@apply text-lg font-bold underline-offset-2 transition-colors hover:underline focus:underline;
 }
 
 .title:not(:last-child) {
@@ -49,7 +53,7 @@
 }
 
 .buttons {
-	@apply mx-[-20px] mt-0 flex flex-col sm:flex-row;
+	@apply mx-[-20px] mt-0 flex flex-col md:flex-row;
 }
 
 .button {
@@ -61,9 +65,9 @@
 }
 
 .wishButton {
-	@apply sm:rounded-bl-lg;
+	@apply md:rounded-bl-lg;
 }
 
 .addButton {
-	@apply rounded-b-lg sm:rounded-br-lg sm:rounded-bl-none;
+	@apply rounded-b-lg md:rounded-br-lg md:rounded-bl-none;
 }

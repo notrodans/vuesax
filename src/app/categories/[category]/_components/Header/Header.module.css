@@ -6,10 +6,6 @@
 	@apply mb-3;
 }
 
-.top {
-	@apply flex items-center justify-between;
-}
-
 .title {
 	@apply mb-3 !important;
 }

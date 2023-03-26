@@ -11,9 +11,10 @@ const fetchProducts = async (category: string) => {
 			},
 			cache: "force-cache"
 		});
-		return (await response.json()) as IProduct[];
-	} catch {
-		return null;
+		return (await response.json()) as { pages: number; products: IProduct[] };
+	} catch (e) {
+		console.log(e);
+		return { pages: 0, products: [] };
 	}
 };
 
@@ -24,9 +25,14 @@ export default async function Layout({
 	children: ReactNode;
 	params: { category: string };
 }) {
-	const products = await fetchProducts(params.category);
+	const { products, pages } = await fetchProducts(params.category);
 	return (
-		<ProductsProvider products={products} category={params.category}>
+		<ProductsProvider
+			pages={pages}
+			brands={products.map(p => ({ brand: p.brand, brandSlug: p.brandSlug }))}
+			products={products?.slice(0, 20)}
+			category={params.category}
+		>
 			{children}
 		</ProductsProvider>
 	);

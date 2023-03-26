@@ -17,8 +17,6 @@ const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 		<div className={styles.breadcrumbs}>
 			<div className={clsx(styles.container, "container")}>
 				<div className={styles.body}>
-					<div className={styles.category}>Breadcrumbs</div>
-					<span className={styles.vDivider}></span>
 					<div className={styles.goBack}>
 						<Link href={"/"}>
 							<Home />

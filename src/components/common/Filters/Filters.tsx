@@ -1,35 +1,48 @@
 "use client";
 
-import { $axios } from "#/axios";
 import { Settings } from "#/components/icons";
 import { Button, Checkbox, CheckboxGroup, Divider, Rating, Slider, Title } from "#/components/UI";
 import { ProductsContext } from "#/context/products.context";
-import { IProduct } from "#/interfaces/Product.interface";
+import { fetchProductsByCategory, IQueriesProduct } from "#/fetchers";
 import { useFilters } from "#/store";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { FC, memo, useCallback, useContext, useRef, useState } from "react";
+import { FC, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import styles from "./Filters.module.css";
 import { variants } from "./Filters.variants";
 
 const Filters: FC = () => {
-	const { searchValue, setSearchValue } = useFilters();
-	const { products, setProducts, category } = useContext(ProductsContext);
+	const {
+		searchValue,
+		setSearchValue,
+		setRating,
+		rating,
+		selectedBrands,
+		setSelectedBrands,
+		priceState,
+		setPriceState
+	} = useFilters();
+	const { products, setPages, setProducts, category, brands, setBrands } =
+		useContext(ProductsContext);
+	const productsLength = products.length;
 	const [isOpen, setIsOpen] = useState<boolean>(true);
-	const [rating, setRating] = useState(1);
-	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
-	const priceMin = useRef(
-		products && products.length >= 1 ? Math.min(...products.map(i => i.price)) : 0
+	const priceMin = useMemo(
+		() => (products.length >= 1 ? Math.min(...products.map(i => i.price)) : 0),
+		[]
 	);
-	const priceMax = useRef(
-		products && products.length >= 1 ? Math.max(...products.map(i => i.price)) : 0
+	const priceMax = useMemo(
+		() => (products.length >= 1 ? Math.max(...products.map(i => i.price)) : 0),
+		[]
 	);
 
-	const [priceState, setPriceState] = useState<number[] | number>([
-		priceMin.current,
-		priceMax.current
-	]);
+	useEffect(() => {
+		if (productsLength >= 2) {
+			setPriceState([priceMin, priceMax]);
+		} else {
+			setPriceState([priceMin]);
+		}
+	}, [priceMin, priceMax]);
 
 	const onHandleOpen = useCallback(() => {
 		setIsOpen(prev => !prev);
@@ -38,25 +51,27 @@ const Filters: FC = () => {
 	const onClearAllFilters = useCallback(async () => {
 		setRating(1);
 		setSelectedBrands([]);
-		setPriceState([priceMin.current, priceMax.current]);
+		setPriceState([priceMin, priceMax]);
 		setSearchValue("");
 
 		try {
-			const { data } = await $axios.get<IProduct[]>("products/bySlug/" + category);
-			setProducts?.(data ?? []);
+			const { products, pages } = await fetchProductsByCategory(category);
+			setProducts?.(products.slice(0, 20));
+			setPages?.(pages);
 		} catch {
 			setProducts?.([]);
+			setPages?.(0);
 		}
 	}, [category, setProducts, priceMin, priceMax]);
 
 	const onClick = useCallback(async () => {
-		const params: { search?: string; brands?: string; rating?: number; price?: string } = {};
+		const params: IQueriesProduct = {};
 
 		if (searchValue) {
 			params.search = searchValue;
 		}
 
-		if (selectedBrands.length >= 1) {
+		if (selectedBrands.length > 0) {
 			params.brands = `${selectedBrands.join(",")}`;
 		}
 
@@ -65,19 +80,37 @@ const Filters: FC = () => {
 		}
 
 		if (Array.isArray(priceState)) {
-			if (priceState.length === 2 && priceState[0] > 1 && priceState[1] > 0) {
-				params.price = `${(priceState as number[])[0]},${(priceState as number[])[1]}`;
+			if (priceState.length === 2 && priceState[0] > 0 && priceState[1] > 0) {
+				params.price = `${priceState[0]},${priceState[1]}`;
 			}
 		}
+
 		try {
-			const { data } = await $axios.get<IProduct[]>("products/bySlug/" + category, {
-				params
-			});
-			setProducts?.(data ?? []);
+			const { products, pages } = await fetchProductsByCategory(category, params);
+			setProducts?.(products.slice(0, 20));
+			setPages?.(pages);
 		} catch {
-			setProducts?.([]);
+			setPages?.(0);
+			setBrands?.([]);
 		}
 	}, [category, priceState, rating, selectedBrands, searchValue]);
+
+	const brandsCheckbox = useMemo(
+		() =>
+			brands?.map?.(b => {
+				return (
+					<Checkbox aria-label={b.brand} className={styles.brand} key={b.brand} value={b.brandSlug}>
+						{b.brand}
+					</Checkbox>
+				);
+			}),
+		[brands]
+	);
+
+	const isMulti = productsLength >= 2;
+	const isDisabled = productsLength < 2;
+	const minValue = isMulti ? priceMin : undefined;
+	const maxValue = isMulti ? priceMax : priceMin;
 
 	return (
 		<div className={styles.filters}>
@@ -104,13 +137,13 @@ const Filters: FC = () => {
 				<Slider
 					label='Currency'
 					formatOptions={{ style: "currency", currency: "USD" }}
-					multi={products ? products?.length >= 2 : false}
-					isDisabled={products ? products?.length < 2 : true}
+					multi={isMulti}
+					isDisabled={isDisabled}
 					step={10}
-					value={Array.isArray(priceState) && priceState?.length >= 2 ? priceState : 0}
+					value={priceState}
 					defaultValue={priceState}
-					minValue={priceMin.current}
-					maxValue={priceMax.current}
+					minValue={minValue}
+					maxValue={maxValue}
 					onChange={setPriceState}
 				/>
 				<Divider />
@@ -124,11 +157,7 @@ const Filters: FC = () => {
 					onChange={setSelectedBrands}
 					className={clsx(styles.checkboxGroup, styles.brands)}
 				>
-					{products?.map?.(p => (
-						<Checkbox aria-label={p.title} className={styles.brand} key={p.id} value={p.brandSlug}>
-							{p.brand}
-						</Checkbox>
-					))}
+					{brandsCheckbox}
 				</CheckboxGroup>
 				<Divider />
 				<Title tag='h3' className={styles.title}>
@@ -147,4 +176,4 @@ const Filters: FC = () => {
 	);
 };
 
-export default memo(Filters);
+export default Filters;

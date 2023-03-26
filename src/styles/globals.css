@@ -80,3 +80,30 @@ video {
 		transform: rotate(360deg);
 	}
 }
+
+.paginate {
+	@apply flex items-center;
+}
+.paginate__previous {
+	@apply mr-5;
+}
+.paginate__next {
+	@apply ml-5;
+}
+.paginate__active {
+	@apply text-vuesax-purple;
+}
+.paginate__item {
+}
+
+.paginate__page {
+	@apply inline-block bg-vuesax-darkBlue p-2 	hover:text-vuesax-purple focus:text-vuesax-purple;
+}
+
+.paginate__item:nth-child(2) .paginate__page {
+	@apply rounded-l-lg;
+}
+
+.paginate__item:nth-last-child(2) .paginate__page {
+	@apply rounded-r-lg;
+}

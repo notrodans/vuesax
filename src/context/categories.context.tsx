@@ -9,7 +9,7 @@ export interface ICategoriesContext extends PropsWithChildren {
 }
 
 export const CategoriesContext = createContext<ICategoriesContext>({
-	categories: []
+	categories: null
 });
 
 export const CategoriesProvider: FC<ICategoriesContext> = ({ children, categories }) => {

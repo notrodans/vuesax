@@ -1,3 +1,4 @@
+export { default as Arrow } from "./Arrow";
 export { default as Arrows } from "./Arrows";
 export { default as Bell } from "./Bell";
 export { default as Grid } from "./Grid";

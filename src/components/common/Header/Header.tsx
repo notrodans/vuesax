@@ -1,8 +1,7 @@
 "use client";
 
-import { User } from "#/components/common";
 import { Bell, Search } from "#/components/icons";
-import { Logo } from "#/components/UI";
+import { Logo, User } from "#/components/UI";
 import { useUser } from "#/hooks/useUser";
 import clsx from "clsx";
 import Link from "next/link";

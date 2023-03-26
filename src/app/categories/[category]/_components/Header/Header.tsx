@@ -1,52 +1,71 @@
 "use clinet";
 
 import { $axios } from "#/axios";
-import { Grid } from "#/components/icons";
-import { Button, SearchField, Title } from "#/components/UI";
+import { SearchField, Title } from "#/components/UI";
 import { ProductsContext } from "#/context/products.context";
+import { fetchProductsByCategory, IQueriesProduct } from "#/fetchers";
 import { useFilters } from "#/store";
 import { declOfNumber } from "#/utils/decline";
-import clsx from "clsx";
-import React, { FC, useContext } from "react";
+import { FC, useContext } from "react";
 import styles from "./Header.module.css";
 import { IHeaderProps } from "./Header.props";
 
-export const Header: FC<IHeaderProps> = ({ productsLength, onGridClick }) => {
-	const { category, setProducts } = useContext(ProductsContext);
-	const { setSearchValue, searchValue } = useFilters();
-	const onClick = async () => {
+export const Header: FC<IHeaderProps> = ({ productsLength }) => {
+	const { category, setProducts, setPages } = useContext(ProductsContext);
+	const { setSearchValue, searchValue, priceState, selectedBrands, rating } = useFilters();
+
+	const onSubmit = async () => {
 		try {
-			const { data } = await $axios.get("products/bySlug/" + category, {
-				params: {
-					search: searchValue
+			const params: IQueriesProduct = {};
+
+			if (searchValue) {
+				params.search = searchValue;
+			}
+
+			if (selectedBrands.length > 0) {
+				params.brands = `${selectedBrands.join(",")}`;
+			}
+
+			if (rating) {
+				params.rating = rating;
+			}
+
+			if (Array.isArray(priceState)) {
+				if (priceState.length === 2 && priceState[0] > 0 && priceState[1] > 0) {
+					params.price = `${priceState[0]},${priceState[1]}`;
 				}
-			});
-			setProducts?.(data);
+			}
+			const { products, pages } = await fetchProductsByCategory(category, params);
+			setProducts?.(products.slice(0, 20));
+			setPages?.(pages);
 		} catch {
 			setProducts?.([]);
+			setPages?.(0);
 		}
 	};
+
+	const onClear = async () => {
+		try {
+			const { products, pages } = await fetchProductsByCategory(category);
+			setProducts?.(products.slice(0, 20));
+			setPages?.(pages);
+		} catch {
+			setProducts?.([]);
+			setPages?.(0);
+		}
+	};
+
 	return (
 		<div className={styles.header}>
-			<div className={styles.top}>
-				<Title tag='h3' className={styles.title}>
-					{productsLength && productsLength}&nbsp;
-					{declOfNumber(productsLength, ["result", "results"])}&nbsp; found
-				</Title>
-				<Button
-					onClick={onGridClick}
-					apperance='white'
-					rounded
-					size='medium'
-					className={clsx(styles.gridButton, {
-						[styles.active]: productsLength >= 3
-					})}
-					icon={<Grid />}
-				/>
-			</div>
+			<Title tag='h3' className={styles.title}>
+				{productsLength && productsLength}&nbsp;
+				{declOfNumber(productsLength, ["result", "results"])}&nbsp; found
+			</Title>
 			<div className={styles.search}>
 				<SearchField
-					onClickButton={onClick}
+					onClear={onClear}
+					onSubmit={onSubmit}
+					onClickButton={onSubmit}
 					value={searchValue}
 					onChange={setSearchValue}
 					placeholder='Search here'

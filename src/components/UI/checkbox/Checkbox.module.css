@@ -1,9 +1,9 @@
 .checkbox {
-	@apply flex cursor-pointer items-center gap-[10px];
+	@apply relative flex cursor-pointer pl-[27px];
 }
 
 .box {
-	@apply h-[17px] w-[17px] rounded-[3px] border-2 border-solid border-vuesax-white outline outline-[2px] outline-transparent transition-colors;
+	@apply absolute top-[3px] left-0 h-[17px] w-[17px] flex-shrink-0 flex-grow-0 basis-[17px] rounded-[3px] border-2 border-solid border-vuesax-white outline outline-[2px] outline-transparent transition-colors;
 }
 
 .rounded {

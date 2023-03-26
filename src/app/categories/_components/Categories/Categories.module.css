@@ -11,11 +11,7 @@
 }
 
 .body {
-	@apply grid gap-[30px] sm:grid-cols-2 2xl:grid-cols-3;
-}
-
-.grid {
-	@apply sm:grid-cols-2;
+	@apply grid gap-[30px] max-md:grid-cols-2 max-sm:grid-cols-1 md:grid-cols-3;
 }
 
 .search:not(:last-child) {

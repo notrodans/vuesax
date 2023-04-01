@@ -1,35 +1,30 @@
 "use client";
 
-import { $axios } from "#/axios";
+import { $baseAxios } from "#/axios";
 import { Arrow } from "#/components/icons";
 import { Pagination } from "#/components/UI";
 import { ProductsContext } from "#/context/products.context";
 import { IProduct } from "#/interfaces/Product.interface";
 import clsx from "clsx";
-import { FC, memo, useContext, useMemo, useRef } from "react";
+import { FC, useContext } from "react";
 import Card from "../Card/Card";
 import { Header } from "../Header/Header";
 import styles from "./Products.module.css";
 
-export const Products: FC = memo(() => {
+export const Products: FC = () => {
 	const { products, pages, setProducts, category } = useContext(ProductsContext);
-	const productsState = useMemo(() => products, [products]);
-	const productsLength = productsState?.length || 0;
-
-	const isMount = useRef<boolean>(false);
 
 	const onClick = async (page: number) => {
 		try {
-			const { data } = await $axios.get<{ pages: number; products: IProduct[] }>(
+			const { data } = await $baseAxios.get<{ pages: number; products: IProduct[] }>(
 				`products/bySlug/${category}`,
 				{
 					params: {
 						page: page + 1,
-						total: 20
+						total: 10
 					}
 				}
 			);
-			isMount.current = true;
 			setProducts?.(data.products);
 		} catch (e) {
 			setProducts?.([]);
@@ -39,11 +34,9 @@ export const Products: FC = memo(() => {
 	return (
 		<div className={styles.products}>
 			<div className={styles.categories}>
-				<Header productsLength={productsLength} />
+				<Header />
 				<div className={styles.body}>
-					{productsState?.map?.(p => (
-						<Card key={p.id} {...p} />
-					))}
+					{products.length >= 1 && products.map(p => <Card key={p.id} {...p} />)}
 				</div>
 			</div>
 			{pages > 0 && (
@@ -64,6 +57,4 @@ export const Products: FC = memo(() => {
 			)}
 		</div>
 	);
-});
-
-Products.displayName = "Products";
+};

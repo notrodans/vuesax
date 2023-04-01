@@ -38,6 +38,6 @@ const Input = forwardRef((props: IInputProps, ref: any) => {
 	);
 });
 
-Input.displayName = "vuesax-input";
+Input.displayName = "input";
 
 export default Input;

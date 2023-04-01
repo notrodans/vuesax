@@ -1,6 +1,6 @@
 "use client";
 
-import { $axios } from "#/axios";
+import { $baseAxios } from "#/axios";
 import { SearchField, Title } from "#/components/UI";
 import { CategoriesContext } from "#/context/categories.context";
 import { ICategory } from "#/interfaces/Category.interface";
@@ -21,7 +21,22 @@ export const Categories: FC = () => {
 			Object.assign(params, { search: searchValue });
 		}
 		try {
-			const { data } = await $axios.get<ICategory[]>("categories", {
+			const { data } = await $baseAxios.get<ICategory[]>("categories", {
+				params
+			});
+			setCategories?.(data);
+		} catch {
+			setCategories?.([]);
+		}
+	};
+
+	const onClear = async () => {
+		const params: { search?: string } = {};
+		if (searchValue) {
+			Object.assign(params, { search: searchValue });
+		}
+		try {
+			const { data } = await $baseAxios.get<ICategory[]>("categories", {
 				params
 			});
 			setCategories?.(data);

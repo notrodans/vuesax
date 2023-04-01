@@ -24,7 +24,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 						{pathsIsValid && <Arrows />}
 					</div>
 					{pathsIsValid &&
-						paths.map((p, i, arr) => {
+						paths?.map((p, i, arr) => {
 							const path = `/${arr.slice(0, i + 1).join("/")}`;
 							return (
 								<span className={styles.path} key={path}>

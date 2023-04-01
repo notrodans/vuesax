@@ -1,7 +1,11 @@
 import axios from "axios";
 import { getSession, signOut } from "next-auth/react";
 
-const getAuthInstance = async () => {
+export const $baseAxios = axios.create({
+	baseURL: process.env.NEXT_PUBLIC_API_URL
+});
+
+const authInstance = () => {
 	const $axios = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_URL, withCredentials: true });
 
 	$axios.interceptors.request.use(async config => {
@@ -23,7 +27,7 @@ const getAuthInstance = async () => {
 			const originalRequest = error.config;
 			const session = await getSession({ req: originalRequest.headers.referer });
 			if (
-				(error.response.status === 401 || error.response.status === 500) &&
+				(error.response?.status === 401 || error.response?.status === 500) &&
 				!originalRequest._retry &&
 				session?.user.refreshToken
 			) {
@@ -55,9 +59,4 @@ const getAuthInstance = async () => {
 	return $axios;
 };
 
-export const $axios = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL,
-	withCredentials: true
-});
-
-export default getAuthInstance;
+export default authInstance();

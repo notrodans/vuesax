@@ -1,5 +1,9 @@
+import { Breadcrumbs } from "#/components/UI";
 import { CategoriesProvider } from "#/context/categories.context";
 import { ICategory } from "#/interfaces/Category.interface";
+import { Wrapper } from "#/layouts/Wrapper/Wrapper";
+import clsx from "clsx";
+import styles from "./categories.module.css";
 
 export const metadata = {
 	title: "Vuesax | Categories"
@@ -21,5 +25,14 @@ const fetchCategories = async () => {
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const categories = await fetchCategories();
-	return <CategoriesProvider categories={categories}>{children}</CategoriesProvider>;
+	return (
+		<CategoriesProvider categories={categories}>
+			<Wrapper>
+				<Breadcrumbs />
+				<div className={styles.wrapper}>
+					<div className={clsx(styles.container, "container")}>{children}</div>
+				</div>
+			</Wrapper>
+		</CategoriesProvider>
+	);
 }

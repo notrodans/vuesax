@@ -1,7 +1,9 @@
+import { $baseAxios } from "#/axios";
 import axios from "axios";
 import { decode } from "jsonwebtoken";
 import NextAuth, { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { signOut } from "next-auth/react";
 
 export const options: AuthOptions = {
 	providers: [
@@ -12,16 +14,22 @@ export const options: AuthOptions = {
 				password: { label: "Password", type: "password" }
 			},
 			async authorize(credentials) {
-				const { data } = await axios.post(
-					process.env.NEXT_PUBLIC_API_URL + "/auth/login",
-					credentials
-				);
-				if (data) {
+				try {
+					const { data } = await $baseAxios.post("auth/login", credentials);
 					const { user, tokens } = data;
 					const role = user.role;
 					return { role, ...tokens };
+				} catch (e) {
+					if (axios.isAxiosError(e)) {
+						const { response } = e;
+						if (response?.status === 401) {
+							throw new Error("Credentials are wrong");
+						} else {
+							throw e;
+						}
+					}
+					throw e;
 				}
-				return null;
 			}
 		})
 	],
@@ -49,16 +57,16 @@ export const options: AuthOptions = {
 					iat: number;
 					exp: number;
 				};
-				if (decodedToken && decodedToken.exp < currentTime) {
+				if (decodedToken && decodedToken.exp <= currentTime) {
 					try {
-						const { data } = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/auth/refresh", {
+						const { data } = await $baseAxios.post("auth/refresh", {
 							refreshToken: token.refreshToken
 						});
 						token.accessToken = data.accessToken;
 					} catch (err) {
 						if (axios.isAxiosError(err))
 							if (err.response?.status === 401) {
-								console.log(err.response.data.message);
+								await signOut();
 							}
 					}
 				}

@@ -1,31 +1,33 @@
 "use client";
 
 import { Pattern } from "#/components/icons";
-import { Button, Input } from "#/components/UI";
+import { Button, Error, Input } from "#/components/UI";
+import { fetchSignIn } from "#/fetchers/fetchSignIn";
 import { useUser } from "#/hooks/useUser";
 import clsx from "clsx";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { SignInFormInputs } from "../_interfaces";
 import styles from "./signin.module.css";
 
-interface FormInputs {
-	email: string;
-	password: string;
-}
-
 export default function Page() {
+	const router = useRouter();
+	const [error, setError] = useState<string>("");
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<FormInputs>();
+	} = useForm<SignInFormInputs>();
 
-	const onSubmit: SubmitHandler<FormInputs> = async data => {
-		await signIn("credentials", {
-			...data
-		});
+	const onSubmit: SubmitHandler<SignInFormInputs> = async data => {
+		const response = await fetchSignIn(data);
+
+		if (response.isSuccess) {
+			router.push("/");
+		} else if (response.error) {
+			setError(response.error.message);
+		}
 	};
 
 	const { data, isLoading } = useUser({
@@ -34,7 +36,6 @@ export default function Page() {
 		revalidateOnReconnect: false,
 		shouldRetryOnError: false
 	});
-	const router = useRouter();
 
 	useEffect(() => {
 		if (data) {
@@ -59,6 +60,7 @@ export default function Page() {
 						<Pattern />
 					</div>
 					<div className={styles.right}>
+						{error && <Error message={error} />}
 						<form method={"post"} onSubmit={handleSubmit(onSubmit)}>
 							<Input
 								{...register("email", {

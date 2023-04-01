@@ -65,9 +65,14 @@ const Thumb: FC<ThumbProps> = props => {
 		state
 	);
 
-	const { focusProps } = useFocusRing();
+	const { focusProps, isFocusVisible } = useFocusRing();
 	return (
-		<div {...thumbProps} className={styles.thumb}>
+		<div
+			{...thumbProps}
+			className={clsx(styles.thumb, {
+				[styles.focus]: isFocusVisible
+			})}
+		>
 			<VisuallyHidden>
 				<input ref={inputRef} {...mergeProps(inputProps, focusProps)} />
 			</VisuallyHidden>

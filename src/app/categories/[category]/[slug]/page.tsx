@@ -11,7 +11,6 @@ const fetchProduct = async (slug: string) => {
 	});
 	if (response.ok) {
 		const product = (await response.json()) as IProduct;
-		console.log(product);
 		return product;
 	}
 
@@ -23,5 +22,5 @@ export default async function Category({ params }: { params: { slug: string } })
 	if (!product) {
 		return notFound();
 	}
-	return <div className='container'>{product?.title}</div>;
+	return <div className='container'>{product.title}</div>;
 }

@@ -1,4 +1,4 @@
-import { $axios } from "#/axios";
+import { $baseAxios } from "#/axios";
 import { IProduct } from "#/interfaces/Product.interface";
 
 export interface IQueriesProduct {
@@ -11,7 +11,7 @@ export interface IQueriesProduct {
 }
 
 const fetchProductsByCategory = async (category: string, params?: IQueriesProduct) => {
-	const { data } = await $axios.get<{ pages: number; products: IProduct[] }>(
+	const { data } = await $baseAxios.get<{ pages: number; products: IProduct[] }>(
 		`products/bySlug/${category}`,
 		{
 			params

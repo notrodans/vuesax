@@ -1,6 +1,5 @@
-"use clinet";
+"use client";
 
-import { $axios } from "#/axios";
 import { SearchField, Title } from "#/components/UI";
 import { ProductsContext } from "#/context/products.context";
 import { fetchProductsByCategory, IQueriesProduct } from "#/fetchers";
@@ -8,10 +7,9 @@ import { useFilters } from "#/store";
 import { declOfNumber } from "#/utils/decline";
 import { FC, useContext } from "react";
 import styles from "./Header.module.css";
-import { IHeaderProps } from "./Header.props";
 
-export const Header: FC<IHeaderProps> = ({ productsLength }) => {
-	const { category, setProducts, setPages } = useContext(ProductsContext);
+export const Header: FC = () => {
+	const { category, setProducts, setPages, count, setCount } = useContext(ProductsContext);
 	const { setSearchValue, searchValue, priceState, selectedBrands, rating } = useFilters();
 
 	const onSubmit = async () => {
@@ -36,7 +34,7 @@ export const Header: FC<IHeaderProps> = ({ productsLength }) => {
 				}
 			}
 			const { products, pages } = await fetchProductsByCategory(category, params);
-			setProducts?.(products.slice(0, 20));
+			setProducts?.(products.slice(0, 10));
 			setPages?.(pages);
 		} catch {
 			setProducts?.([]);
@@ -47,10 +45,12 @@ export const Header: FC<IHeaderProps> = ({ productsLength }) => {
 	const onClear = async () => {
 		try {
 			const { products, pages } = await fetchProductsByCategory(category);
-			setProducts?.(products.slice(0, 20));
+			setProducts?.(products.slice(0, 10));
+			setCount?.(products.length);
 			setPages?.(pages);
 		} catch {
 			setProducts?.([]);
+			setCount?.(0);
 			setPages?.(0);
 		}
 	};
@@ -58,8 +58,8 @@ export const Header: FC<IHeaderProps> = ({ productsLength }) => {
 	return (
 		<div className={styles.header}>
 			<Title tag='h3' className={styles.title}>
-				{productsLength && productsLength}&nbsp;
-				{declOfNumber(productsLength, ["result", "results"])}&nbsp; found
+				{count}&nbsp;
+				{declOfNumber(count, ["result", "results"])}&nbsp; found
 			</Title>
 			<div className={styles.search}>
 				<SearchField

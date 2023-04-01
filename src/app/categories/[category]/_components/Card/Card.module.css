@@ -1,13 +1,13 @@
 .card {
-	@apply flex flex-col rounded-bl-lg rounded-br-lg bg-vuesax-darkBlue pt-3 md:pt-5;
+	@apply flex flex-col rounded-bl-lg rounded-br-lg bg-vuesax-darkBlue;
 }
 
 .image {
-	@apply relative pb-[80%] md:pb-[60%];
+	@apply relative pb-[80%];
 }
 
 .image:not(:last-child) {
-	@apply mb-[35px];
+	@apply mb-[15px];
 }
 
 .body {

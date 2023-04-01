@@ -1,23 +1,15 @@
 "use client";
 
-import { getAuthInstance } from "#/axios";
 import { Pattern } from "#/components/icons";
-import { Button, Input } from "#/components/UI";
+import { Button, Error, Input } from "#/components/UI";
+import { fetchRegister } from "#/fetchers/fetchRegister";
 import { useUser } from "#/hooks/useUser";
-import axios from "axios";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { SignUpFormInputs } from "../_interfaces";
 import styles from "./signup.module.css";
-
-interface FormInputs {
-	login: string;
-	firstName: string;
-	lastName: string;
-	email: string;
-	password: string;
-}
 
 export default function Page() {
 	const router = useRouter();
@@ -26,23 +18,15 @@ export default function Page() {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<FormInputs>();
+	} = useForm<SignUpFormInputs>();
 
-	const onSubmit: SubmitHandler<FormInputs> = async data => {
-		const fetchRegister = async () => {
-			try {
-				const $axios = await getAuthInstance();
-				await $axios.post("auth/register", { ...data });
-				router.push("/signin");
-			} catch (err) {
-				if (axios.isAxiosError(err)) {
-					return setError(err.message);
-				}
-				console.log(err);
-			}
-		};
-
-		await fetchRegister();
+	const onSubmit: SubmitHandler<SignUpFormInputs> = async (data: SignUpFormInputs) => {
+		const response = await fetchRegister(data);
+		if (response?.isSuccess) {
+			router.push("/signin");
+		} else if (response?.error) {
+			setError(response.error.message);
+		}
 	};
 
 	const { data, isLoading } = useUser({
@@ -75,6 +59,7 @@ export default function Page() {
 						<Pattern />
 					</div>
 					<div className={styles.right}>
+						{error && <Error message={error} />}
 						<form method={"post"} onSubmit={handleSubmit(onSubmit)}>
 							<Input
 								{...register("login", {

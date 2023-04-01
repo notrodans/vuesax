@@ -22,17 +22,17 @@ const Filters: FC = () => {
 		priceState,
 		setPriceState
 	} = useFilters();
-	const { products, setPages, setProducts, category, brands, setBrands } =
+	const { products, setPages, setProducts, category, brands, setBrands, setCount } =
 		useContext(ProductsContext);
 	const productsLength = products.length;
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 
 	const priceMin = useMemo(
-		() => (products.length >= 1 ? Math.min(...products.map(i => i.price)) : 0),
+		() => (productsLength >= 1 ? Math.min(...products.map(i => i.price)) : 0),
 		[]
 	);
 	const priceMax = useMemo(
-		() => (products.length >= 1 ? Math.max(...products.map(i => i.price)) : 0),
+		() => (productsLength >= 1 ? Math.max(...products.map(i => i.price)) : 0),
 		[]
 	);
 
@@ -56,10 +56,12 @@ const Filters: FC = () => {
 
 		try {
 			const { products, pages } = await fetchProductsByCategory(category);
-			setProducts?.(products.slice(0, 20));
+			setProducts?.(products.slice(0, 10));
+			setCount?.(products.length);
 			setPages?.(pages);
 		} catch {
 			setProducts?.([]);
+			setCount?.(0);
 			setPages?.(0);
 		}
 	}, [category, setProducts, priceMin, priceMax]);
@@ -87,10 +89,12 @@ const Filters: FC = () => {
 
 		try {
 			const { products, pages } = await fetchProductsByCategory(category, params);
-			setProducts?.(products.slice(0, 20));
+			setProducts?.(products.slice(0, 10));
+			setCount?.(products.length || 0);
 			setPages?.(pages);
 		} catch {
 			setPages?.(0);
+			setCount?.(0);
 			setBrands?.([]);
 		}
 	}, [category, priceState, rating, selectedBrands, searchValue]);

@@ -1,4 +1,4 @@
-.breadcrumbs {
+.breadcrumbs:not(:last-child) {
 	@apply mb-6 lg:mb-[50px];
 }
 

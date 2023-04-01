@@ -97,7 +97,7 @@ video {
 }
 
 .paginate__page {
-	@apply inline-block bg-vuesax-darkBlue p-2 	hover:text-vuesax-purple focus:text-vuesax-purple;
+	@apply inline-block bg-vuesax-darkBlue p-2 hover:text-vuesax-purple focus:text-vuesax-purple;
 }
 
 .paginate__item:nth-child(2) .paginate__page {

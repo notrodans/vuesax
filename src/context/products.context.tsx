@@ -1,7 +1,7 @@
 "use client";
 
 import { IProduct } from "#/interfaces/Product.interface";
-import { createContext, FC, PropsWithChildren, useState } from "react";
+import { createContext, FC, PropsWithChildren, useEffect, useState } from "react";
 
 export interface IBrand {
 	brand: string;
@@ -17,13 +17,16 @@ export interface IProductsContext extends PropsWithChildren {
 	setCategory?: (newCategory: string) => void;
 	brands: IBrand[];
 	setBrands?: (newBrands: IBrand[]) => void;
+	count: number;
+	setCount?: (count: number) => void;
 }
 
 export const ProductsContext = createContext<IProductsContext>({
 	pages: 0,
 	brands: [],
 	products: [],
-	category: ""
+	category: "",
+	count: 0
 });
 
 export const ProductsProvider: FC<IProductsContext> = ({
@@ -31,12 +34,14 @@ export const ProductsProvider: FC<IProductsContext> = ({
 	products,
 	category,
 	pages,
-	brands
+	brands,
+	count
 }) => {
 	const [productsState, setProductsState] = useState<IProduct[]>(products);
 	const [categoryState, setCategoryState] = useState<string>(category);
 	const [pagesState, setPagesState] = useState<number>(pages);
 	const [brandsState, setBrandsState] = useState<IBrand[]>(brands);
+	const [countState, setCountState] = useState<number>(count);
 
 	const setProducts = (newProducts: IProduct[]) => {
 		setProductsState(newProducts);
@@ -54,6 +59,10 @@ export const ProductsProvider: FC<IProductsContext> = ({
 		setBrandsState(brands);
 	};
 
+	const setCount = (count: number) => {
+		setCountState(count);
+	};
+
 	return (
 		<ProductsContext.Provider
 			value={{
@@ -64,7 +73,9 @@ export const ProductsProvider: FC<IProductsContext> = ({
 				category: categoryState,
 				setCategory,
 				brands: brandsState,
-				setBrands
+				setBrands,
+				count: countState,
+				setCount
 			}}
 		>
 			{children}

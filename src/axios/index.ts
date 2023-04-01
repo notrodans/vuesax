@@ -1,1 +1,1 @@
-export { default as getAuthInstance, $axios } from "./axios";
+export { default as $axiosWithAuth, $baseAxios } from "./axios";

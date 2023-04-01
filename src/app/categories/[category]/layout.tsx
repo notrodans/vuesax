@@ -13,7 +13,6 @@ const fetchProducts = async (category: string) => {
 		});
 		return (await response.json()) as { pages: number; products: IProduct[] };
 	} catch (e) {
-		console.log(e);
 		return { pages: 0, products: [] };
 	}
 };
@@ -26,12 +25,16 @@ export default async function Layout({
 	params: { category: string };
 }) {
 	const { products, pages } = await fetchProducts(params.category);
+	const productsLength = products?.length || 0;
 	return (
 		<ProductsProvider
 			pages={pages}
-			brands={products.map(p => ({ brand: p.brand, brandSlug: p.brandSlug }))}
-			products={products?.slice(0, 20)}
+			brands={
+				productsLength >= 1 ? products.map(p => ({ brand: p.brand, brandSlug: p.brandSlug })) : []
+			}
+			products={productsLength >= 1 ? products.slice(0, 10) : []}
 			category={params.category}
+			count={productsLength}
 		>
 			{children}
 		</ProductsProvider>

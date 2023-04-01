@@ -20,3 +20,7 @@
 .thumb {
 	@apply top-2/4 h-5 w-5 cursor-pointer rounded-[50%] bg-vuesax-purple;
 }
+
+.focus {
+	@apply outline outline-2 outline-white;
+}

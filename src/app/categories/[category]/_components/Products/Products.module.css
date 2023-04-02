@@ -1,0 +1,15 @@
+.body {
+	@apply grid gap-[30px] max-sm:grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3;
+}
+
+.center {
+	@apply flex justify-center md:mt-8;
+}
+
+.categories:not(:last-child) {
+	@apply pb-5;
+}
+
+.paginate {
+	@apply col-span-2 justify-center;
+}

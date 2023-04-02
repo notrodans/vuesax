@@ -1,0 +1,46 @@
+.filters {
+	@apply flex flex-col;
+}
+
+.header {
+	@apply flex items-center justify-between gap-x-3;
+}
+
+.header:not(:last-child) {
+	@apply mb-3;
+}
+
+.headerTitle {
+	@apply mb-0 !important;
+}
+
+.openButton {
+	@apply inline-flex h-10 w-10 lg:hidden !important;
+}
+
+.body {
+	@apply rounded-lg bg-vuesax-darkBlue max-md:h-0;
+}
+
+.active {
+	@apply p-[25px];
+}
+
+.active:not(:last-child) {
+	@apply mb-[30px];
+}
+
+.checkboxGroup {
+	@apply flex flex-col gap-y-[15px];
+}
+
+.brand {
+	@apply capitalize;
+}
+
+.checkbox:not(:last-child) {
+	@apply mb-[15px];
+}
+
+.prices {
+}

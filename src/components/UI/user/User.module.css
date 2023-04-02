@@ -1,0 +1,7 @@
+.user {
+	@apply flex items-center gap-x-[10px] text-[14px];
+}
+
+.fio {
+	@apply flex items-center gap-x-1;
+}

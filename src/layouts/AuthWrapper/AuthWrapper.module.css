@@ -1,0 +1,7 @@
+.wrapper {
+	@apply flex min-h-screen flex-col overflow-hidden;
+}
+
+.page {
+	@apply flex flex-auto;
+}

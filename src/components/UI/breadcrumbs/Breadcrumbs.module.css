@@ -1,0 +1,27 @@
+.breadcrumbs:not(:last-child) {
+	@apply mb-6 lg:mb-[50px];
+}
+
+.body {
+	@apply flex content-baseline items-center gap-x-[10px] overflow-x-auto;
+}
+
+.goBack {
+	@apply flex items-center gap-x-[10px];
+}
+
+.goBack svg {
+	@apply mt-[-1px];
+}
+
+.path {
+	@apply flex items-center gap-x-[10px];
+}
+
+.link {
+	@apply font-semibold capitalize;
+}
+
+.active {
+	@apply text-vuesax-primary;
+}

@@ -4,6 +4,13 @@ const nextConfig = {
 	swcMinify: true,
 	experimental: {
 		appDir: true
+	},
+	images: {
+		remotePatterns: [
+			{
+				hostname: "loremflickr.com"
+			}
+		]
 	}
 };
 

@@ -14,13 +14,9 @@
 	box-sizing: border-box;
 }
 
-*:focus {
-	@apply outline-vuesax-white outline-offset-2 outline-1
-}
-
 html,
 body {
-	@apply bg-vuesax-bluewood text-vuesax-white min-h-full min-w-[320px] text-base
+	@apply min-h-full min-w-[320px] bg-vuesax-bluewood text-base text-vuesax-white;
 }
 
 button {
@@ -59,6 +55,55 @@ h6 {
 	font-family: inherit;
 }
 
+img,
+video {
+	max-width: none;
+	height: inherit;
+}
+
 .container {
-	@apply ml-auto mr-auto max-w-[1570px] px-[15px]
+	@apply box-content w-auto;
+}
+
+.range .spectrum-Slider-handle_e4b6ba {
+	@apply bg-vuesax-violet;
+}
+
+.spinner_aj0A {
+	@apply fill-vuesax-primary;
+	transform-origin: center;
+	animation: spinner_KYSC 0.75s infinite linear;
+}
+
+@keyframes spinner_KYSC {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.paginate {
+	@apply flex items-center;
+}
+.paginate__previous {
+	@apply mr-5;
+}
+.paginate__next {
+	@apply ml-5;
+}
+.paginate__active {
+	@apply text-vuesax-purple;
+}
+.paginate__item {
+}
+
+.paginate__page {
+	@apply inline-block bg-vuesax-darkBlue p-2 hover:text-vuesax-purple focus:text-vuesax-purple;
+}
+
+.paginate__item:nth-child(2) .paginate__page {
+	@apply rounded-l-lg;
+}
+
+.paginate__item:nth-last-child(2) .paginate__page {
+	@apply rounded-r-lg;
 }

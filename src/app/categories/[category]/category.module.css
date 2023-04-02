@@ -1,0 +1,3 @@
+.body {
+	@apply grid gap-[30px] pb-5 lg:grid-cols-categories;
+}

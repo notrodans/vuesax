@@ -1,3 +1,4 @@
+import { Title } from "#/components/UI";
 import { IProduct } from "#/interfaces/Product.interface";
 import { notFound } from "next/navigation";
 
@@ -7,7 +8,7 @@ const fetchProduct = async (slug: string) => {
 		headers: {
 			["Content-Type"]: "application/json"
 		},
-		cache: "force-cache"
+		cache: "reload"
 	});
 	if (response.ok) {
 		const product = (await response.json()) as IProduct;
@@ -22,5 +23,5 @@ export default async function Category({ params }: { params: { slug: string } })
 	if (!product) {
 		return notFound();
 	}
-	return <div className='container'>{product.title}</div>;
+	return <Title>{product.title}</Title>;
 }

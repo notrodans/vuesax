@@ -9,7 +9,7 @@ const fetchProducts = async (category: string) => {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			cache: "force-cache"
+			cache: "reload"
 		});
 		return (await response.json()) as { pages: number; products: IProduct[] };
 	} catch (e) {

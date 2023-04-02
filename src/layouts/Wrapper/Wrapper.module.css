@@ -3,5 +3,5 @@
 }
 
 .page {
-	@apply flex-auto;
+	@apply flex-auto pb-4;
 }

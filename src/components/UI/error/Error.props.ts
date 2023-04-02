@@ -1,5 +1,6 @@
-import { HTMLMotionProps } from "framer-motion";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
-export interface IErrorProps extends HTMLMotionProps<"div"> {
-	message: string;
+export interface IErrorProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	message: string | ReactNode[];
 }

@@ -1,7 +1,15 @@
 .error {
-	@apply flex justify-between gap-x-3 rounded-sm bg-red-300 p-4 font-semibold text-red-500;
+	@apply justify-between rounded-sm bg-red-300 p-4 font-semibold text-red-500;
 }
 
 .error:not(:last-child) {
 	@apply mb-3;
+}
+
+.message::first-letter {
+	@apply uppercase;
+}
+
+.message:not(:last-child) {
+	@apply mb-2;
 }

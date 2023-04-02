@@ -10,7 +10,7 @@ import styles from "./Header.module.css";
 
 export const Header: FC = () => {
 	const { category, setProducts, setPages, count, setCount } = useContext(ProductsContext);
-	const { setSearchValue, searchValue, priceState, selectedBrands, rating } = useFilters();
+	const { setSearchValue, searchValue, priceRange, selectedBrands, rating } = useFilters();
 
 	const onSubmit = async () => {
 		try {
@@ -28,9 +28,9 @@ export const Header: FC = () => {
 				params.rating = rating;
 			}
 
-			if (Array.isArray(priceState)) {
-				if (priceState.length === 2 && priceState[0] > 0 && priceState[1] > 0) {
-					params.price = `${priceState[0]},${priceState[1]}`;
+			if (Array.isArray(priceRange)) {
+				if (priceRange.length === 2 && priceRange[0] > 0 && priceRange[1] > 0) {
+					params.price = `${priceRange[0]},${priceRange[1]}`;
 				}
 			}
 			const { products, pages } = await fetchProductsByCategory(category, params);

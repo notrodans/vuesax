@@ -1,13 +1,13 @@
 "use client";
 
-import { Settings } from "#/components/icons";
 import { Button, Checkbox, CheckboxGroup, Divider, Rating, Slider, Title } from "#/components/UI";
+import { Settings } from "#/components/icons";
 import { ProductsContext } from "#/context/products.context";
-import { fetchProductsByCategory, IQueriesProduct } from "#/fetchers";
+import { IQueriesProduct, fetchProductsByCategory } from "#/fetchers";
 import { useFilters } from "#/store";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { FC, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { FC, useContext, useEffect, useMemo, useState } from "react";
 import styles from "./Filters.module.css";
 import { variants } from "./Filters.variants";
 
@@ -19,13 +19,12 @@ const Filters: FC = () => {
 		rating,
 		selectedBrands,
 		setSelectedBrands,
-		priceState,
-		setPriceState
+		priceRange,
+		setPriceRange
 	} = useFilters();
 	const { products, setPages, setProducts, category, brands, setBrands, setCount } =
 		useContext(ProductsContext);
 	const productsLength = products.length;
-	const [isOpen, setIsOpen] = useState<boolean>(true);
 
 	const priceMin = useMemo(
 		() => (productsLength >= 1 ? Math.min(...products.map(i => i.price)) : 0),
@@ -36,22 +35,24 @@ const Filters: FC = () => {
 		[]
 	);
 
+	const [isOpen, setIsOpen] = useState<boolean>(true);
+
 	useEffect(() => {
 		if (productsLength >= 2) {
-			setPriceState([priceMin, priceMax]);
+			setPriceRange([priceMin, priceMax]);
 		} else {
-			setPriceState([priceMin]);
+			return;
 		}
 	}, [priceMin, priceMax]);
 
-	const onHandleOpen = useCallback(() => {
+	const onHandleOpen = () => {
 		setIsOpen(prev => !prev);
-	}, []);
+	};
 
-	const onClearAllFilters = useCallback(async () => {
+	const onClearAllFilters = async () => {
 		setRating(1);
 		setSelectedBrands([]);
-		setPriceState([priceMin, priceMax]);
+		setPriceRange([priceMin, priceMax]);
 		setSearchValue("");
 
 		try {
@@ -64,26 +65,30 @@ const Filters: FC = () => {
 			setCount?.(0);
 			setPages?.(0);
 		}
-	}, [category, setProducts, priceMin, priceMax]);
+	};
 
-	const onClick = useCallback(async () => {
+	const onClick = async () => {
 		const params: IQueriesProduct = {};
-
 		if (searchValue) {
 			params.search = searchValue;
 		}
 
 		if (selectedBrands.length > 0) {
-			params.brands = `${selectedBrands.join(",")}`;
+			params.brands = selectedBrands.join(",");
 		}
-
 		if (rating) {
 			params.rating = rating;
 		}
 
-		if (Array.isArray(priceState)) {
-			if (priceState.length === 2 && priceState[0] > 0 && priceState[1] > 0) {
-				params.price = `${priceState[0]},${priceState[1]}`;
+		if (Array.isArray(priceRange)) {
+			if (
+				!(priceRange.length !== 2) &&
+				!(priceRange[0] > priceRange[1]) &&
+				priceRange[0] + priceRange[1] !== priceMin + priceMax
+			) {
+				const newPrice = `${priceRange[0]},${priceRange[1]}`;
+
+				params.price = newPrice;
 			}
 		}
 
@@ -97,7 +102,7 @@ const Filters: FC = () => {
 			setCount?.(0);
 			setBrands?.([]);
 		}
-	}, [category, priceState, rating, selectedBrands, searchValue]);
+	};
 
 	const brandsCheckbox = useMemo(
 		() =>
@@ -110,11 +115,6 @@ const Filters: FC = () => {
 			}),
 		[brands]
 	);
-
-	const isMulti = productsLength >= 2;
-	const isDisabled = productsLength < 2;
-	const minValue = isMulti ? priceMin : undefined;
-	const maxValue = isMulti ? priceMax : priceMin;
 
 	return (
 		<div className={styles.filters}>
@@ -141,14 +141,13 @@ const Filters: FC = () => {
 				<Slider
 					label='Currency'
 					formatOptions={{ style: "currency", currency: "USD" }}
-					multi={isMulti}
-					isDisabled={isDisabled}
+					multi
 					step={10}
-					value={priceState}
-					defaultValue={priceState}
-					minValue={minValue}
-					maxValue={maxValue}
-					onChange={setPriceState}
+					value={priceRange}
+					defaultValue={priceRange}
+					minValue={priceMin}
+					maxValue={priceMax}
+					onChange={setPriceRange}
 				/>
 				<Divider />
 				<Title tag='h3' className={styles.title}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { IProduct } from "#/interfaces/Product.interface";
-import { createContext, FC, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, FC, PropsWithChildren, useState } from "react";
 
 export interface IBrand {
 	brand: string;

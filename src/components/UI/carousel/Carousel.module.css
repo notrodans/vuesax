@@ -19,7 +19,7 @@
 }
 
 .link {
-	@apply whitespace-nowrap font-semibold capitalize;
+	@apply font-semibold capitalize;
 }
 
 .active {

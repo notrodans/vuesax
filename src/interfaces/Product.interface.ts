@@ -10,4 +10,7 @@ export interface IProduct {
 	primaryImage: string;
 	categorySlug: string;
 	images: string[];
+	userId: number;
+	createdAt: Date;
+	updatedAt: Date;
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import { FC, memo } from "react";
 import { mergeProps, useFocusRing, usePress } from "react-aria";

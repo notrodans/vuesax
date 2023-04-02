@@ -1,5 +1,7 @@
 import { ProductsProvider } from "#/context/products.context";
+import { ICategory } from "#/interfaces/Category.interface";
 import { IProduct } from "#/interfaces/Product.interface";
+import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 
 const fetchProducts = async (category: string) => {
@@ -7,13 +9,36 @@ const fetchProducts = async (category: string) => {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/products/bySlug/${category}`, {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
-			},
-			cache: "force-cache"
+				["Content-Type"]: "application/json"
+			}
 		});
+
+		if (!response.ok) {
+			throw new Error(response.statusText);
+		}
+
 		return (await response.json()) as { pages: number; products: IProduct[] };
 	} catch (e) {
 		return { pages: 0, products: [] };
+	}
+};
+
+const fetchCategory = async (category: string) => {
+	try {
+		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/categories/${category}`, {
+			method: "GET",
+			headers: {
+				["Content-Type"]: "application/json"
+			}
+		});
+
+		if (!response.ok) {
+			throw new Error(response.statusText);
+		}
+
+		return (await response.json()) as ICategory;
+	} catch (e) {
+		return null;
 	}
 };
 
@@ -24,6 +49,10 @@ export default async function Layout({
 	children: ReactNode;
 	params: { category: string };
 }) {
+	const category = await fetchCategory(params.category);
+	if (!category) {
+		return notFound();
+	}
 	const { products, pages } = await fetchProducts(params.category);
 	const productsLength = products?.length || 0;
 	return (

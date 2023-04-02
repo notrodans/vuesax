@@ -1,5 +1,3 @@
-"use client";
-
 import { Search } from "#/components/icons";
 import { Button } from "#/components/UI";
 import clsx from "clsx";

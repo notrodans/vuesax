@@ -13,7 +13,7 @@ module.exports = {
 	theme: {
 		extend: {
 			screens: {
-				sm: pxToRem(494.98),
+				sm: pxToRem(767.98),
 				md: pxToRem(991.98),
 				lg: pxToRem(1280),
 				xl: pxToRem(1440),
@@ -112,9 +112,5 @@ module.exports = {
 			})
 		}
 	},
-	plugins: [
-		require("@tailwindcss/typography"),
-		require("@tailwindcss/forms"),
-		require("@tailwindcss/line-clamp")
-	]
+	plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")]
 };

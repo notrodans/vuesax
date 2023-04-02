@@ -59,7 +59,7 @@
 }
 
 .rounded {
-	@apply rounded-lg;
+	@apply rounded-[3px];
 }
 
 .button.custom {

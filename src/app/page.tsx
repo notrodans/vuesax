@@ -1,5 +1,3 @@
-"use client";
-
 import { Wrapper } from "#/layouts/Wrapper/Wrapper";
 import Link from "next/link";
 

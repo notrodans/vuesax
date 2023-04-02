@@ -1,6 +1,5 @@
 "use client";
 
-import { Bell, Search } from "#/components/icons";
 import { Logo, User } from "#/components/UI";
 import { useUser } from "#/hooks/useUser";
 import clsx from "clsx";
@@ -36,17 +35,7 @@ const Header: FC<HeaderProps> = () => {
 								</div>
 							</div>
 						) : data ? (
-							<>
-								<div className={styles.actions}>
-									<button>
-										<Search />
-									</button>
-									<button>
-										<Bell />
-									</button>
-								</div>
-								<User firstName={data?.firstName} lastName={data?.lastName} avatar={data?.image} />
-							</>
+							<User firstName={data?.firstName} lastName={data?.lastName} avatar={data?.image} />
 						) : (
 							<div className={styles.links}>
 								<Link href={"/signin"}>Log In</Link>

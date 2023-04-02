@@ -1,5 +1,3 @@
-"use client";
-
 import { Arrows, Home } from "#/components/icons";
 import clsx from "clsx";
 import Link from "next/link";
@@ -19,7 +17,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = () => {
 				<div className={styles.body}>
 					<div className={styles.goBack}>
 						<Link href={"/"}>
-							<Home />
+							<Home aria-label='go to home' />
 						</Link>
 						{pathsIsValid && <Arrows />}
 					</div>

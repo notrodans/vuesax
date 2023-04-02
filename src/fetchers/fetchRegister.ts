@@ -5,6 +5,7 @@ import axios from "axios";
 interface SignUpResult {
 	isSuccess: boolean;
 	error?: Error;
+	messages?: string[];
 	status?: number;
 }
 
@@ -21,7 +22,8 @@ export const fetchRegister = async (data: SignUpFormInputs): Promise<SignUpResul
 		if (axios.isAxiosError(e)) {
 			return {
 				isSuccess: false,
-				error: new Error(e.message),
+				messages: [...e.response?.data.message],
+				error: new Error(e.response?.statusText),
 				status: e.response?.status
 			};
 		} else if (e instanceof Error) {

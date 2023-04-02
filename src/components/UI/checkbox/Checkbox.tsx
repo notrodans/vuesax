@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import { FC, memo, useContext, useRef } from "react";
 import { mergeProps, useCheckboxGroupItem, useFocusRing, VisuallyHidden } from "react-aria";

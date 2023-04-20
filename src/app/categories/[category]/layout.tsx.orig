@@ -9,8 +9,14 @@ const fetchProducts = async (category: string) => {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/products/bySlug/${category}`, {
 			method: "GET",
 			headers: {
+<<<<<<< HEAD
 				["Content-Type"]: "application/json"
 			}
+=======
+				"Content-Type": "application/json"
+			},
+			cache: "reload"
+>>>>>>> main
 		});
 
 		if (!response.ok) {

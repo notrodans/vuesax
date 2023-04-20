@@ -1,0 +1,39 @@
+.product {
+	@apply flex gap-4 max-sm:flex-col;
+}
+
+.images {
+	@apply flex-1 basis-3/6;
+}
+
+.body {
+	@apply flex-1 basis-3/6;
+}
+
+.primaryImage {
+	@apply relative;
+}
+
+.primaryImage:not(:last-child) {
+	@apply mb-2;
+}
+
+.image {
+	@apply rounded-md;
+}
+
+.rating {
+	@apply absolute right-2 top-2;
+}
+
+.carousel {
+	@apply max-w-0;
+}
+
+.price {
+	display: inline-block;
+}
+
+.header:not(:last-child) {
+	@apply mb-4;
+}

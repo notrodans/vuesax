@@ -10,18 +10,6 @@
 	@apply flex items-center justify-between gap-x-5;
 }
 
-.actions {
-	@apply flex gap-x-[20px];
-}
-
-.right {
-	@apply flex gap-x-[30px];
-}
-
-.right.loading {
-	@apply self-stretch;
-}
-
 .links {
 	@apply flex items-center gap-x-2;
 }

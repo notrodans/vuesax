@@ -1,7 +1,19 @@
 .user {
+	@apply relative;
+}
+
+.body {
 	@apply flex items-center gap-x-[10px] text-[14px];
 }
 
 .fio {
 	@apply flex items-center gap-x-1;
+}
+
+.menu {
+	@apply invisible absolute bottom-0 left-0 z-10 min-w-[126px] translate-y-full overflow-hidden overflow-y-auto rounded bg-vuesax-primary;
+}
+
+.option {
+	@apply block p-2 hover:bg-vuesax-gray;
 }

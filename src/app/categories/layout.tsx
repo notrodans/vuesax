@@ -17,6 +17,11 @@ const fetchCategories = async () => {
 				"Content-Type": "application/json"
 			}
 		});
+
+		if (!response.ok) {
+			throw new Error(response.statusText);
+		}
+
 		return (await response.json()) as ICategory[];
 	} catch {
 		return null;

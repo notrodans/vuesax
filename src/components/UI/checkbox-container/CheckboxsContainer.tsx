@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, FC, memo } from "react";
 import { useCheckboxGroup } from "react-aria";
 import { CheckboxGroupState, useCheckboxGroupState } from "react-stately";

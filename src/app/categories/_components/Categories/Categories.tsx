@@ -30,21 +30,6 @@ export const Categories: FC = () => {
 		}
 	};
 
-	const onClear = async () => {
-		const params: { search?: string } = {};
-		if (searchValue) {
-			Object.assign(params, { search: searchValue });
-		}
-		try {
-			const { data } = await $baseAxios.get<ICategory[]>("categories", {
-				params
-			});
-			setCategories?.(data);
-		} catch {
-			setCategories?.([]);
-		}
-	};
-
 	return (
 		<div className={styles.categories}>
 			<div className={styles.header}>

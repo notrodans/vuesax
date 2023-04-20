@@ -12,8 +12,7 @@ export const metadata = {
 const primaryFont = Montserrat({
 	weight: ["300", "400", "600"],
 	subsets: ["latin"],
-	variable: "--primary-font",
-	style: "normal"
+	variable: "--primary-font"
 });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

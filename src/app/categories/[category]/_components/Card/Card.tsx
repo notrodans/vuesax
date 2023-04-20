@@ -34,11 +34,11 @@ const Card: FC<CardProps> = props => {
 			</Link>
 			<div className={styles.body}>
 				<div className={styles.header}>
-					<Button size='small' weight='600' iconRight={<Star />} className={styles.ratingButton}>
+					<Button rounded size='small' weight='600' iconRight={<Star />}>
 						<span className={styles.rating}>{rating}</span>
 					</Button>
 					<span className={styles.cost}>
-						{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price)}
+						{Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price)}
 					</span>
 				</div>
 				<div className={styles.description}>

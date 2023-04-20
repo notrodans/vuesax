@@ -13,7 +13,7 @@ import styles from "./signup.module.css";
 
 export default function Page() {
 	const router = useRouter();
-	const [error, setError] = useState<string>("");
+	const [error, setError] = useState<string | string[]>("");
 	const {
 		register,
 		handleSubmit,
@@ -25,7 +25,11 @@ export default function Page() {
 		if (response?.isSuccess) {
 			router.push("/signin");
 		} else if (response?.error) {
-			setError(response.error.message);
+			if (response?.messages) {
+				setError([...response?.messages]);
+			} else {
+				setError(response.error.message);
+			}
 		}
 	};
 
@@ -108,6 +112,7 @@ export default function Page() {
 									}
 								})}
 								errorMessage={errors.email?.message}
+								onPaste={e => register("email").onChange(e)}
 								onChange={e => register("email").onChange(onChangeHandler(e))}
 								label='Email'
 								type='email'
@@ -118,6 +123,7 @@ export default function Page() {
 									required: { value: true, message: "Please fill the password" }
 								})}
 								errorMessage={errors.password?.message}
+								onPaste={e => register("password").onChange(e)}
 								onChange={e => register("password").onChange(onChangeHandler(e))}
 								label='Password'
 								type='password'

@@ -51,12 +51,12 @@ export const options: AuthOptions = {
 				};
 			}
 			if (token) {
-				const currentTime = Math.floor(Date.now() / 1000);
 				const decodedToken = decode(token.accessToken) as {
 					email: string;
 					iat: number;
 					exp: number;
 				};
+				const currentTime = Math.floor(Date.now() / 1000);
 				if (decodedToken && decodedToken.exp <= currentTime) {
 					try {
 						const { data } = await $baseAxios.post("auth/refresh", {

@@ -45,9 +45,7 @@ const authInstance = () => {
 					await $axios(originalRequest);
 				} catch (e) {
 					if (axios.isAxiosError(e)) {
-						if (e.response?.status === 401 || e.response?.status === 500) {
-							return await signOut();
-						}
+						return await signOut();
 					}
 				}
 			}

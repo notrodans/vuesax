@@ -2,10 +2,18 @@
 	@apply border-solid border-[#D6D6D6];
 }
 
-.divider:not(:last-child) {
-	@apply mb-[30px];
+.medium:not(:last-child) {
+	@apply mb-8;
 }
 
-.divider:not(:first-child) {
-	@apply mt-[30px];
+.medium:not(:first-child) {
+	@apply mt-8;
+}
+
+.small:not(:last-child) {
+	@apply mb-4;
+}
+
+.small:not(:first-child) {
+	@apply mt-4;
 }
